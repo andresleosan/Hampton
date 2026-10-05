@@ -4,12 +4,12 @@
 
 - La SQLite privada aceptada conserva 43 registros y el SHA-256 `201D531EF95ABE02ADEBAB25BF78ED02C84CEAE6967BCBF419AF133CAB216F01`; la proyección no la modifica.
 - El snapshot público determinista contiene 42 fichas: 24 residenciales y 18 comerciales; excluye una confidencial y omite un precio pendiente. El equipo público son dos agentes curados por separado.
-- La UI carga `data/private/public-snapshot.json`; `demo-preview.json` ya no es la entrada normal y las fixtures sintéticas quedan como fallback de desarrollo/pruebas.
+- La UI carga el snapshot final filtrado versionado en `src/data/public-snapshot.json`; las fixtures sintéticas quedan como fallback de desarrollo/pruebas. Sus 45 fotos autorizadas viven en `public/media/`; SQLite, informes y fuentes siguen fuera de Git.
 - Portadas: 38 primeras imágenes descargadas en caché privada, cinco fotos verificadas preservadas en tres fichas y un placeholder por respuesta superior al límite. Solo se consultó la primera URL importada por ficha, con allowlist, robots, ritmo secuencial y caché.
 - Demo editorial renovada bajo D-104: retratos reales locales de Gilberto y Joshua, calculadora con tipo inicial ilustrativo del 5.00 % y tour guiado de «Small Villa» con Play/Pause, estancias manuales, carga diferida, sin audio y respeto de movimiento reducido.
 - Ritmo vertical optimizado bajo D-105 sin alterar contenido ni funciones: se eliminó el doble padding del equipo en fichas, se compactaron legal/footer y el placeholder de similares, y se redujo el alto de las vistas medidas sin overflow ni fallos de red.
 - Evidencia: 257/257 pruebas, typecheck limpio y build de 45 páginas; revisión visual independiente en Chrome, escritorio y móvil, sin overflow ni fallos de red. El smoke funcional confirmó filtros, calculadora, reserva, carga diferida de 3D, Axe sin infracciones y móvil sin overflow.
-- No se afirma disponibilidad actual. No hubo push ni despliegue. `.claude/` no se modificó. La publicación (P4) sigue requiriendo autorización nueva.
+- No se afirma disponibilidad actual. El repositorio público y la integración GitHub de Cloudflare Pages están autorizados (D-099); falta confirmar el primer despliegue HTTP. `.claude/` no se modificó.
 - Sigue abierto el aviso conocido GHSA-ch52-4w7c-c8xp en la dependencia transitiva `http-cache-semantics` 4.2.0 de Astro 7.3.5; no se ejecutó `audit fix` ni se cambiaron dependencias.
 
 ## Historial anterior

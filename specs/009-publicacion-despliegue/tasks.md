@@ -4,8 +4,8 @@
 
 - [x] **T5. Construir la integración local.** `pnpm test` pasa 249 pruebas, `pnpm typecheck` no emite diagnósticos y `pnpm build` genera 45 páginas.
 - [x] **T6. Verificar en navegador.** Cuatro rutas, filtros, hipoteca, similares, reserva simulada y 3D bajo demanda pasan; Axe informa cero infracciones y no hay overflow a 320 px.
-- [x] **T7. Mantener artefactos privados fuera de Git.** SQLite, snapshot, informe, manifiesto, portadas y las cinco fotos verificadas continúan ignorados.
-- [ ] **T8. Publicar.** No autorizado: no hubo push ni despliegue. El aviso GHSA conocido permanece documentado y no se aplicó `audit fix`.
+- [x] **T7. Mantener artefactos privados fuera de Git.** SQLite, informe, configuración curada y fuentes continúan ignorados; solo el snapshot final filtrado y las 45 fotos autorizadas se versionan bajo rutas públicas separadas (D-099).
+- [ ] **T8. Publicar.** GitHub `main` está autorizado; falta que Luis guarde la configuración de integración en Cloudflare Pages y comprobar la URL real. El aviso GHSA conocido permanece documentado y no se aplicó `audit fix`.
 
 Las cifras inferiores de ocho páginas corresponden al estado anterior y quedan superadas por esta actualización.
 

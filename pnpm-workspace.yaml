@@ -1,4 +1,3 @@
-storeDir: 'F:\.pnpm-store'
 minimumReleaseAge: 10080
 minimumReleaseAgeStrict: true
 saveExact: true

@@ -3,6 +3,7 @@
 > **APROBADOS PARA PLANIFICACIÓN el contrato público y el pipeline local**, 2026-10-03, revisión 03 (D-050, D-051). Prioridad P1 para el pipeline local. El despliegue real (AC-009-03, -04, -07 y -09) queda **pendiente** del proveedor, el presupuesto y el control de acceso.
 > **Cambio 2026-10-04 (`/sdd-change`, P-S8, D-081):** los inmuebles y las personas del equipo marcados «no vistos en la última importación» no se exportan (D-079, D-073). AC nuevo AC-009-16. Ningún AC existente cambia.
 > **Cambio 2026-10-04 (`/sdd-change`, P-S10, D-092):** los inmuebles con título vacío en la fuente y las personas del equipo con nombre vacío no se exportan. AC nuevo AC-009-17. Ningún AC existente cambia.
+> **Cambio 2026-10-04 (D-099):** proveedor y acceso resueltos: Cloudflare Pages público con integración GitHub sobre `main`. El repositorio incluye solo el snapshot final filtrado y las 45 fotografías autorizadas necesarias para un build reproducible; SQLite, fuentes y material de revisión continúan privados.
 
 ## Objetivo
 Generar una versión independiente del sitio a partir de los campos públicos aprobados, comprobarla y publicarla solo si lo supera todo. Ante cualquier fallo, conservar lo último válido de cada estado (D-032, C-10).
@@ -22,9 +23,9 @@ Generar una versión independiente del sitio a partir de los campos públicos ap
 - **Cierre:** regresión final con Playwright y revisión de seguridad (REQ-014), y cierre de la demo completa.
 - Si la construcción copia imágenes de la fuente, lo hace con las mismas reglas de destino y límites que el importador (spec 001, AC-001-16 y -17).
 
+**Resuelto (D-099):** Cloudflare Pages público mediante integración GitHub y despliegue automático desde `main`.
+
 **Fuera de alcance, pendiente de decisión:**
-- el proveedor (Cloudflare frente a Vercel; brief §10);
-- el acceso público o restringido (P-15);
 - el dominio;
 - el destino de las copias (BR-4).
 
@@ -156,9 +157,8 @@ Proceden de archivos de configuración del proyecto, no de SQLite, y siguen la m
 | AC-009-17 | *While* el título de un inmueble o el nombre de una persona del equipo están vacíos en la fuente, la exportación *shall not* incluirlos en la salida pública (ni como ficha o persona del equipo, ni en una pestaña o en la sección comercial, ni en `similar_ids`, ni sus imágenes o su retrato) y *shall* registrarlos en el informe de construcción con su motivo. *When* la fuente publica el valor en una ejecución completa, *shall* exportarse de nuevo | Test de exportación con un inmueble de título vacío y una persona de nombre vacío (excluidos, con su motivo en el informe, fuera de `similar_ids` y de las copias de imágenes) y con los mismos registros ya con valor (exportados) |
 
 ## Dependencias
-Como mínimo 001, 002 y 003. Para AC-009-12, todas. Decisiones pendientes: proveedor, acceso y dominio.
+Como mínimo 001, 002 y 003. Para AC-009-12, todas. Decisión pendiente: dominio.
 
 ## Cuestiones pendientes
-- El proveedor y el presupuesto (recomendación previa: Cloudflare Workers Free; no aprobada).
-- Acceso público o restringido.
+- El dominio público definitivo; mientras tanto se usa el subdominio `pages.dev` asignado por Cloudflare.
 - El destino privado de las copias de SQLite (spec 001).

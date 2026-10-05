@@ -1,0 +1,2233 @@
+{
+  "listings": [
+    {
+      "public_id": "property-8ddbc0a468ecc765",
+      "section": "commercial",
+      "geography": "jersey",
+      "tab": null,
+      "source_order": 0,
+      "operation": "sale",
+      "status_literal": "FOR SALE",
+      "status_normalised": "open",
+      "title": "Pontac Hotel",
+      "locality": "St Clement",
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": null,
+      "bathrooms": null,
+      "figures": [
+        {
+          "type": "sale_price",
+          "amount": 4750000,
+          "currency": "GBP",
+          "period": null,
+          "label_en": "Sale price",
+          "display_text": "£4.75m",
+          "under_review": false
+        }
+      ],
+      "media": [
+        {
+          "public_path": "/media/listings/property-8ddbc0a468ecc765.jpg",
+          "width": 1024,
+          "height": 768,
+          "alt": "Pontac Hotel"
+        }
+      ],
+      "legal_notice": null,
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/residential-properties",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [],
+      "calculator": null,
+      "demo": {
+        "aerial": null,
+        "tour3d": false
+      }
+    },
+    {
+      "public_id": "property-225fa3e573d97be3",
+      "section": "commercial",
+      "geography": "jersey",
+      "tab": null,
+      "source_order": 1,
+      "operation": "sale",
+      "status_literal": "FOR SALE",
+      "status_normalised": "open",
+      "title": "Guest House",
+      "locality": "St Helier",
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": null,
+      "bathrooms": null,
+      "figures": [
+        {
+          "type": "sale_price",
+          "amount": 1500000,
+          "currency": "GBP",
+          "period": null,
+          "label_en": "Sale price",
+          "display_text": "£1.5m",
+          "under_review": false
+        }
+      ],
+      "media": [
+        {
+          "public_path": "/media/listings/property-225fa3e573d97be3.jpg",
+          "width": 1536,
+          "height": 2048,
+          "alt": "Guest House"
+        }
+      ],
+      "legal_notice": {
+        "disclaimer": "These particulars do not form part of a contract and whilst every care is taken to ensure their accuracy, Hampton Estates cannot be held responsible for any error or omission that may arise. All viewings are strictly through the offices of Hampton Estates.",
+        "aml": ""
+      },
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/residential-properties",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [],
+      "calculator": null,
+      "demo": {
+        "aerial": null,
+        "tour3d": false
+      }
+    },
+    {
+      "public_id": "property-53cc94fdd6a62942",
+      "section": "commercial",
+      "geography": "jersey",
+      "tab": null,
+      "source_order": 2,
+      "operation": "unknown",
+      "status_literal": "Lease",
+      "status_normalised": "none",
+      "title": "Newsagents, St Helier",
+      "locality": null,
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": null,
+      "bathrooms": null,
+      "figures": [
+        {
+          "type": "other",
+          "amount": null,
+          "currency": null,
+          "period": null,
+          "label_en": "Figure as published",
+          "display_text": "Negotiable",
+          "under_review": false
+        }
+      ],
+      "media": [
+        {
+          "public_path": "/media/listings/property-53cc94fdd6a62942.jpg",
+          "width": 1536,
+          "height": 2048,
+          "alt": "Corner shop 1.jpg"
+        }
+      ],
+      "legal_notice": null,
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/commercial-properties/newsagents-corner-shop-",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [],
+      "calculator": null,
+      "demo": {
+        "aerial": null,
+        "tour3d": false
+      }
+    },
+    {
+      "public_id": "property-225808279b8b92aa",
+      "section": "commercial",
+      "geography": "jersey",
+      "tab": null,
+      "source_order": 3,
+      "operation": "sale",
+      "status_literal": "For sale",
+      "status_normalised": "open",
+      "title": "Princess Garden - Town Centre Restaurant",
+      "locality": "Halkett Street - St Helier",
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": null,
+      "bathrooms": null,
+      "figures": [
+        {
+          "type": "sale_price",
+          "amount": 90000,
+          "currency": "GBP",
+          "period": null,
+          "label_en": "Sale price",
+          "display_text": "£90,000",
+          "under_review": false
+        }
+      ],
+      "media": [
+        {
+          "public_path": "/media/listings/property-225808279b8b92aa.jpg",
+          "width": 4000,
+          "height": 3000,
+          "alt": "Princess Garden.jpg"
+        }
+      ],
+      "legal_notice": null,
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/commercial-properties/princess-garden---town-centre-restaurant",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [
+        "property-6378d86037008df2"
+      ],
+      "calculator": null,
+      "demo": {
+        "aerial": null,
+        "tour3d": false
+      }
+    },
+    {
+      "public_id": "property-6378d86037008df2",
+      "section": "commercial",
+      "geography": "jersey",
+      "tab": null,
+      "source_order": 4,
+      "operation": "sale",
+      "status_literal": "For Sale",
+      "status_normalised": "open",
+      "title": "Casa Mia",
+      "locality": "Kensignton",
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": null,
+      "bathrooms": null,
+      "figures": [
+        {
+          "type": "sale_price",
+          "amount": 80000,
+          "currency": "GBP",
+          "period": null,
+          "label_en": "Sale price",
+          "display_text": "£80,000",
+          "under_review": false
+        }
+      ],
+      "media": [
+        {
+          "public_path": "/media/listings/property-6378d86037008df2.jpg",
+          "width": 1393,
+          "height": 1148,
+          "alt": "Casa Mia front.jpg"
+        }
+      ],
+      "legal_notice": null,
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/commercial-properties/casa-mia",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [
+        "property-7fa857ccb1189b79",
+        "property-225808279b8b92aa"
+      ],
+      "calculator": null,
+      "demo": {
+        "aerial": null,
+        "tour3d": false
+      }
+    },
+    {
+      "public_id": "property-1466e59515d2fd47",
+      "section": "commercial",
+      "geography": "jersey",
+      "tab": null,
+      "source_order": 5,
+      "operation": "unknown",
+      "status_literal": "",
+      "status_normalised": "none",
+      "title": "Town Restaurant",
+      "locality": null,
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": null,
+      "bathrooms": null,
+      "figures": [
+        {
+          "type": "other",
+          "amount": 450000,
+          "currency": "GBP",
+          "period": null,
+          "label_en": "Figure as published",
+          "display_text": "£450,000 Freehold",
+          "under_review": false
+        }
+      ],
+      "media": [
+        {
+          "public_path": "/media/listings/property-1466e59515d2fd47.jpg",
+          "width": 800,
+          "height": 600,
+          "alt": "Outside 1.jpg"
+        }
+      ],
+      "legal_notice": null,
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/commercial-properties/town-restaurant",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [],
+      "calculator": null,
+      "demo": {
+        "aerial": null,
+        "tour3d": false
+      }
+    },
+    {
+      "public_id": "property-f9153b19001100ae",
+      "section": "commercial",
+      "geography": "jersey",
+      "tab": null,
+      "source_order": 6,
+      "operation": "sale",
+      "status_literal": "For Sale",
+      "status_normalised": "open",
+      "title": "Corniche Apartments",
+      "locality": "Hastings Lane, St Helier, Jersey",
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": null,
+      "bathrooms": null,
+      "figures": [
+        {
+          "type": "sale_price",
+          "amount": 2400000,
+          "currency": "GBP",
+          "period": null,
+          "label_en": "Sale price",
+          "display_text": "£2,400,000",
+          "under_review": false
+        }
+      ],
+      "media": [
+        {
+          "public_path": "/media/listings/property-f9153b19001100ae.jpg",
+          "width": 1156,
+          "height": 768,
+          "alt": "cornish.jpg"
+        }
+      ],
+      "legal_notice": null,
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/commercial-properties/corniche-apartments",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [],
+      "calculator": null,
+      "demo": {
+        "aerial": null,
+        "tour3d": false
+      }
+    },
+    {
+      "public_id": "property-2b4655d6dd3d1e01",
+      "section": "commercial",
+      "geography": "jersey",
+      "tab": null,
+      "source_order": 7,
+      "operation": "sale",
+      "status_literal": "For Sale",
+      "status_normalised": "open",
+      "title": "22 Cleveland Road",
+      "locality": "Cleveland Road, St Helier, Jersey",
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": null,
+      "bathrooms": null,
+      "figures": [
+        {
+          "type": "sale_price",
+          "amount": 800000,
+          "currency": "GBP",
+          "period": null,
+          "label_en": "Sale price",
+          "display_text": "£800,000",
+          "under_review": false
+        }
+      ],
+      "media": [
+        {
+          "public_path": "/media/listings/property-2b4655d6dd3d1e01.jpg",
+          "width": 1156,
+          "height": 768,
+          "alt": "22-Cleveland-Road.jpg"
+        }
+      ],
+      "legal_notice": null,
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/commercial-properties/22-cleveland-road",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [],
+      "calculator": null,
+      "demo": {
+        "aerial": null,
+        "tour3d": false
+      }
+    },
+    {
+      "public_id": "property-e1adac609983b04e",
+      "section": "commercial",
+      "geography": "jersey",
+      "tab": null,
+      "source_order": 8,
+      "operation": "sale",
+      "status_literal": "For Sale",
+      "status_normalised": "open",
+      "title": "Pension Kim Hostel",
+      "locality": "Hranice u Aše, Czechia",
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": null,
+      "bathrooms": null,
+      "figures": [],
+      "media": [
+        {
+          "public_path": "/media/listings/property-e1adac609983b04e.jpg",
+          "width": 639,
+          "height": 480,
+          "alt": "133.jpg"
+        }
+      ],
+      "legal_notice": null,
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/commercial-properties/pension-kim-hostel",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [],
+      "calculator": null,
+      "demo": {
+        "aerial": null,
+        "tour3d": false
+      }
+    },
+    {
+      "public_id": "property-7fa857ccb1189b79",
+      "section": "commercial",
+      "geography": "jersey",
+      "tab": null,
+      "source_order": 9,
+      "operation": "sale",
+      "status_literal": "For Sale",
+      "status_normalised": "open",
+      "title": "Retirement Sale",
+      "locality": null,
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": null,
+      "bathrooms": null,
+      "figures": [
+        {
+          "type": "sale_price",
+          "amount": 70000,
+          "currency": "GBP",
+          "period": null,
+          "label_en": "Sale price",
+          "display_text": "£70,000",
+          "under_review": false
+        }
+      ],
+      "media": [
+        {
+          "public_path": "/media/listings/property-7fa857ccb1189b79.jpg",
+          "width": 2048,
+          "height": 1536,
+          "alt": "LITALY.jpg"
+        }
+      ],
+      "legal_notice": null,
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/commercial-properties/retirement-sale",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [
+        "property-6378d86037008df2"
+      ],
+      "calculator": null,
+      "demo": {
+        "aerial": null,
+        "tour3d": false
+      }
+    },
+    {
+      "public_id": "property-877a11b41d10a9c6",
+      "section": "commercial",
+      "geography": "jersey",
+      "tab": null,
+      "source_order": 10,
+      "operation": "sale",
+      "status_literal": "For Sale",
+      "status_normalised": "open",
+      "title": "33 La Colomberie",
+      "locality": "La Colomberie, St Helier, Jersey",
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": null,
+      "bathrooms": null,
+      "figures": [
+        {
+          "type": "sale_price",
+          "amount": 595000,
+          "currency": "GBP",
+          "period": null,
+          "label_en": "Sale price",
+          "display_text": "£595,000",
+          "under_review": false
+        }
+      ],
+      "media": [
+        {
+          "public_path": "/media/listings/property-877a11b41d10a9c6.jpg",
+          "width": 1024,
+          "height": 768,
+          "alt": "la colom.jpg"
+        }
+      ],
+      "legal_notice": null,
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/commercial-properties/33-la-colomberie",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [],
+      "calculator": null,
+      "demo": {
+        "aerial": null,
+        "tour3d": false
+      }
+    },
+    {
+      "public_id": "property-bf00c0e216108a0a",
+      "section": "commercial",
+      "geography": "jersey",
+      "tab": null,
+      "source_order": 11,
+      "operation": "sale",
+      "status_literal": "For Sale",
+      "status_normalised": "open",
+      "title": "5-6 Peter Street",
+      "locality": "Peter Street, St Helier, Jersey",
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": null,
+      "bathrooms": null,
+      "figures": [
+        {
+          "type": "sale_price",
+          "amount": 450000,
+          "currency": "GBP",
+          "period": null,
+          "label_en": "Sale price",
+          "display_text": "£450,000",
+          "under_review": false
+        }
+      ],
+      "media": [
+        {
+          "public_path": "/media/listings/property-bf00c0e216108a0a.jpg",
+          "width": 3260,
+          "height": 2714,
+          "alt": "unnamed.jpg"
+        }
+      ],
+      "legal_notice": null,
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/commercial-properties/5-6-peter-street",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [],
+      "calculator": null,
+      "demo": {
+        "aerial": null,
+        "tour3d": false
+      }
+    },
+    {
+      "public_id": "property-f63d7ad16c9f60c6",
+      "section": "commercial",
+      "geography": "jersey",
+      "tab": null,
+      "source_order": 12,
+      "operation": "sale",
+      "status_literal": "For Sale",
+      "status_normalised": "open",
+      "title": "SOLD - Bar Cafe in Historic Central Market",
+      "locality": "St Helier, Jersey",
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": null,
+      "bathrooms": null,
+      "figures": [
+        {
+          "type": "sale_price",
+          "amount": 40000,
+          "currency": "GBP",
+          "period": null,
+          "label_en": "Sale price",
+          "display_text": "£40,000",
+          "under_review": false
+        }
+      ],
+      "media": [
+        {
+          "public_path": "/media/listings/property-f63d7ad16c9f60c6.jpg",
+          "width": 1200,
+          "height": 674,
+          "alt": "IMG_1117-1200x674.jpg"
+        }
+      ],
+      "legal_notice": null,
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/commercial-properties/sold---bar-cafe-in-historic-central-market",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [
+        "property-4fe301c2d833f8f1",
+        "property-31bbdb7e959ea749",
+        "property-341a9bf9e1592454"
+      ],
+      "calculator": null,
+      "demo": {
+        "aerial": null,
+        "tour3d": false
+      }
+    },
+    {
+      "public_id": "property-31bbdb7e959ea749",
+      "section": "commercial",
+      "geography": "jersey",
+      "tab": null,
+      "source_order": 13,
+      "operation": "sale",
+      "status_literal": "For Sale",
+      "status_normalised": "open",
+      "title": "Fully Equipped Cafe",
+      "locality": "St Helier, Jersey",
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": null,
+      "bathrooms": null,
+      "figures": [
+        {
+          "type": "sale_price",
+          "amount": 45000,
+          "currency": "GBP",
+          "period": null,
+          "label_en": "Sale price",
+          "display_text": "£45,000",
+          "under_review": false
+        }
+      ],
+      "media": [
+        {
+          "public_path": "/media/listings/property-31bbdb7e959ea749.jpg",
+          "width": 1200,
+          "height": 900,
+          "alt": "IMG_2915-1-1200x900.jpg"
+        }
+      ],
+      "legal_notice": null,
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/commercial-properties/fully-equipped-cafe",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [
+        "property-341a9bf9e1592454",
+        "property-f63d7ad16c9f60c6"
+      ],
+      "calculator": null,
+      "demo": {
+        "aerial": null,
+        "tour3d": false
+      }
+    },
+    {
+      "public_id": "property-0acffb704f847735",
+      "section": "commercial",
+      "geography": "jersey",
+      "tab": null,
+      "source_order": 14,
+      "operation": "sale",
+      "status_literal": "For Sale",
+      "status_normalised": "open",
+      "title": "Sid's Continental Takeaway",
+      "locality": "La Colomberie, St Helier, Jersey",
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": null,
+      "bathrooms": null,
+      "figures": [
+        {
+          "type": "sale_price",
+          "amount": null,
+          "currency": null,
+          "period": null,
+          "label_en": "Sale price",
+          "display_text": "Negotiable",
+          "under_review": false
+        }
+      ],
+      "media": [
+        {
+          "public_path": "/media/listings/property-0acffb704f847735.jpg",
+          "width": 1278,
+          "height": 1089,
+          "alt": "IMG_1113_edited.jpg"
+        }
+      ],
+      "legal_notice": null,
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/commercial-properties/sid's-continental-takeaway",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [],
+      "calculator": null,
+      "demo": {
+        "aerial": null,
+        "tour3d": false
+      }
+    },
+    {
+      "public_id": "property-4fe301c2d833f8f1",
+      "section": "commercial",
+      "geography": "jersey",
+      "tab": null,
+      "source_order": 15,
+      "operation": "sale",
+      "status_literal": "For Sale",
+      "status_normalised": "open",
+      "title": "Fish & Chip Takeaway",
+      "locality": "Hill Street, St Helier, Jersey",
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": null,
+      "bathrooms": null,
+      "figures": [
+        {
+          "type": "sale_price",
+          "amount": 35000,
+          "currency": "GBP",
+          "period": null,
+          "label_en": "Sale price",
+          "display_text": "£35,000",
+          "under_review": false
+        }
+      ],
+      "media": [
+        {
+          "public_path": "/media/listings/property-4fe301c2d833f8f1.jpg",
+          "width": 1200,
+          "height": 800,
+          "alt": "IMG_9530-1200x800.jpg"
+        }
+      ],
+      "legal_notice": null,
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/commercial-properties/sold---fish-%26-chip-takeaway",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [
+        "property-f63d7ad16c9f60c6"
+      ],
+      "calculator": null,
+      "demo": {
+        "aerial": null,
+        "tour3d": false
+      }
+    },
+    {
+      "public_id": "property-341a9bf9e1592454",
+      "section": "commercial",
+      "geography": "jersey",
+      "tab": null,
+      "source_order": 16,
+      "operation": "sale",
+      "status_literal": "For Sale",
+      "status_normalised": "open",
+      "title": "Funchal Paradise",
+      "locality": "La Colomberie, St Helier, Jersey",
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": null,
+      "bathrooms": null,
+      "figures": [
+        {
+          "type": "sale_price",
+          "amount": 45000,
+          "currency": "GBP",
+          "period": null,
+          "label_en": "Sale price",
+          "display_text": "£45,000",
+          "under_review": false
+        }
+      ],
+      "media": [
+        {
+          "public_path": "/media/listings/property-341a9bf9e1592454.jpg",
+          "width": 1068,
+          "height": 712,
+          "alt": "rsz_img_3963.jpg"
+        }
+      ],
+      "legal_notice": null,
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/commercial-properties/funchal-paradise",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [
+        "property-31bbdb7e959ea749",
+        "property-f63d7ad16c9f60c6"
+      ],
+      "calculator": null,
+      "demo": {
+        "aerial": null,
+        "tour3d": false
+      }
+    },
+    {
+      "public_id": "property-5850d8d025b43f4d",
+      "section": "commercial",
+      "geography": "jersey",
+      "tab": null,
+      "source_order": 17,
+      "operation": "rent",
+      "status_literal": "To Let",
+      "status_normalised": "open",
+      "title": "Margarita Stores",
+      "locality": "St Saviours Road, St Helier, Jersey",
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": null,
+      "bathrooms": null,
+      "figures": [
+        {
+          "type": "rent",
+          "amount": 9360,
+          "currency": "GBP",
+          "period": null,
+          "label_en": "Rent",
+          "display_text": "£9,360",
+          "under_review": false
+        }
+      ],
+      "media": [
+        {
+          "public_path": "/media/listings/property-5850d8d025b43f4d.jpg",
+          "width": 960,
+          "height": 540,
+          "alt": "marg.jpg"
+        }
+      ],
+      "legal_notice": null,
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/commercial-properties/margarita-stores",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [],
+      "calculator": null,
+      "demo": {
+        "aerial": null,
+        "tour3d": false
+      }
+    },
+    {
+      "public_id": "property-31086c7f7308da60",
+      "section": "residential",
+      "geography": "jersey",
+      "tab": "for-sale",
+      "source_order": 0,
+      "operation": "sale",
+      "status_literal": "FOR SALE",
+      "status_normalised": "open",
+      "title": "Le Bernage, Rue Saint Thomas",
+      "locality": "St Saviour",
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": 3,
+      "bathrooms": 1,
+      "figures": [
+        {
+          "type": "sale_price",
+          "amount": 779000,
+          "currency": "GBP",
+          "period": null,
+          "label_en": "Sale price",
+          "display_text": "£779,000",
+          "under_review": false
+        }
+      ],
+      "media": [
+        {
+          "public_path": "/media/listings/property-31086c7f7308da60.png",
+          "width": 709,
+          "height": 475,
+          "alt": "Le Bernage, Rue Saint Thomas"
+        }
+      ],
+      "legal_notice": null,
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/residential-properties",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [
+        "property-f26368c4227bf0d6",
+        "property-2097582dfa479686",
+        "property-1460e52cec0487c1"
+      ],
+      "calculator": {
+        "price_gbp": 779000
+      },
+      "demo": {
+        "aerial": null,
+        "tour3d": false
+      }
+    },
+    {
+      "public_id": "property-2097582dfa479686",
+      "section": "residential",
+      "geography": "jersey",
+      "tab": "for-sale",
+      "source_order": 1,
+      "operation": "sale",
+      "status_literal": "UNDER OFFER",
+      "status_normalised": "open",
+      "title": "Playa D'Or",
+      "locality": "St Clement, Grande Route de la Cote",
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": 3,
+      "bathrooms": 3,
+      "figures": [
+        {
+          "type": "sale_price",
+          "amount": 750000,
+          "currency": "GBP",
+          "period": null,
+          "label_en": "Sale price",
+          "display_text": "£750,000",
+          "under_review": false
+        }
+      ],
+      "media": [
+        {
+          "public_path": "/media/listings/playa-main.avif",
+          "width": 474,
+          "height": 326,
+          "alt": "White house with raised terrace between stone walls"
+        },
+        {
+          "public_path": "/media/listings/playa-secondary.avif",
+          "width": 330,
+          "height": 440,
+          "alt": "Front elevation of a light-coloured period house"
+        }
+      ],
+      "legal_notice": null,
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/residential-properties",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [
+        "property-31086c7f7308da60",
+        "property-f26368c4227bf0d6",
+        "property-1460e52cec0487c1"
+      ],
+      "calculator": {
+        "price_gbp": 750000
+      },
+      "demo": {
+        "aerial": null,
+        "tour3d": false
+      }
+    },
+    {
+      "public_id": "property-31d78e96d885d1ec",
+      "section": "residential",
+      "geography": "jersey",
+      "tab": "for-sale",
+      "source_order": 2,
+      "operation": "sale",
+      "status_literal": "FOR SALE",
+      "status_normalised": "open",
+      "title": "Victoria Street",
+      "locality": "St Helier",
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": 2,
+      "bathrooms": 1,
+      "figures": [
+        {
+          "type": "sale_price",
+          "amount": 460000,
+          "currency": "GBP",
+          "period": null,
+          "label_en": "Sale price",
+          "display_text": "£460,000",
+          "under_review": false
+        }
+      ],
+      "media": [
+        {
+          "public_path": "/media/listings/victoria-main.avif",
+          "width": 356,
+          "height": 469,
+          "alt": "Living and dining room with two arched windows"
+        },
+        {
+          "public_path": "/media/listings/victoria-card.avif",
+          "width": 415,
+          "height": 415,
+          "alt": "Living room with seating, television and dining area"
+        }
+      ],
+      "legal_notice": {
+        "disclaimer": "These particulars do not form part of a contract and whilst every care is taken to ensure their accuracy, Hampton Estates cannot be held responsible for any error or omission that may arise. All viewings are strictly through the offices of Hampton Estates.",
+        "aml": ""
+      },
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/residential-properties",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [
+        "property-c872d6fee7e6045b"
+      ],
+      "calculator": {
+        "price_gbp": 460000
+      },
+      "demo": {
+        "aerial": null,
+        "tour3d": true
+      }
+    },
+    {
+      "public_id": "property-c872d6fee7e6045b",
+      "section": "residential",
+      "geography": "jersey",
+      "tab": "for-sale",
+      "source_order": 3,
+      "operation": "sale",
+      "status_literal": "FOR SALE",
+      "status_normalised": "open",
+      "title": "Modern First Floor Apartment",
+      "locality": "St Aubin",
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "figures": [
+        {
+          "type": "sale_price",
+          "amount": 450000,
+          "currency": "GBP",
+          "period": null,
+          "label_en": "Sale price",
+          "display_text": "£450,000",
+          "under_review": false
+        }
+      ],
+      "media": [
+        {
+          "public_path": "/illustrations/photograph-unavailable.svg",
+          "width": 1200,
+          "height": 900,
+          "alt": "Photograph unavailable for Modern First Floor Apartment"
+        }
+      ],
+      "legal_notice": {
+        "disclaimer": "These particulars do not form part of a contract and whilst every care is taken to ensure their accuracy, Hampton Estates cannot be held responsible for any error or omission that may arise. All viewings are strictly through the offices of Hampton Estates.",
+        "aml": ""
+      },
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/residential-properties",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [
+        "property-31d78e96d885d1ec"
+      ],
+      "calculator": {
+        "price_gbp": 450000
+      },
+      "demo": {
+        "aerial": null,
+        "tour3d": false
+      }
+    },
+    {
+      "public_id": "property-0bb0a52c95e08de6",
+      "section": "residential",
+      "geography": "jersey",
+      "tab": "for-sale",
+      "source_order": 4,
+      "operation": "sale",
+      "status_literal": "FOR SALE",
+      "status_normalised": "open",
+      "title": "Winchester Street",
+      "locality": "St Helier",
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": 6,
+      "bathrooms": 3,
+      "figures": [
+        {
+          "type": "sale_price",
+          "amount": 575000,
+          "currency": "GBP",
+          "period": null,
+          "label_en": "Sale price",
+          "display_text": "£575,000",
+          "under_review": false
+        }
+      ],
+      "media": [
+        {
+          "public_path": "/media/listings/property-0bb0a52c95e08de6.jpg",
+          "width": 1200,
+          "height": 1600,
+          "alt": "Winchester Street"
+        }
+      ],
+      "legal_notice": {
+        "disclaimer": "These particulars do not form part of a contract and whilst every care is taken to ensure their accuracy, Hampton Estates cannot be held responsible for any error or omission that may arise. All viewings are strictly through the offices of Hampton Estates.",
+        "aml": ""
+      },
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/residential-properties",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [
+        "property-372d796054e33d57",
+        "property-31d78e96d885d1ec"
+      ],
+      "calculator": {
+        "price_gbp": 575000
+      },
+      "demo": {
+        "aerial": null,
+        "tour3d": false
+      }
+    },
+    {
+      "public_id": "property-f26368c4227bf0d6",
+      "section": "residential",
+      "geography": "jersey",
+      "tab": "for-sale",
+      "source_order": 5,
+      "operation": "sale",
+      "status_literal": "FOR SALE",
+      "status_normalised": "open",
+      "title": "Town House",
+      "locality": "St Helier",
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": 4,
+      "bathrooms": 1,
+      "figures": [
+        {
+          "type": "sale_price",
+          "amount": 780000,
+          "currency": "GBP",
+          "period": null,
+          "label_en": "Sale price",
+          "display_text": "£780,000",
+          "under_review": false
+        }
+      ],
+      "media": [
+        {
+          "public_path": "/media/listings/property-f26368c4227bf0d6.jpg",
+          "width": 886,
+          "height": 607,
+          "alt": "Town House"
+        }
+      ],
+      "legal_notice": {
+        "disclaimer": "These particulars do not form part of a contract and whilst every care is taken to ensure their accuracy, Hampton Estates cannot be held responsible for any error or omission that may arise. All viewings are strictly through the offices of Hampton Estates.",
+        "aml": ""
+      },
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/residential-properties",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [
+        "property-31086c7f7308da60",
+        "property-2097582dfa479686",
+        "property-1460e52cec0487c1"
+      ],
+      "calculator": {
+        "price_gbp": 780000
+      },
+      "demo": {
+        "aerial": null,
+        "tour3d": false
+      }
+    },
+    {
+      "public_id": "property-d763c60f7f77bb4a",
+      "section": "residential",
+      "geography": "jersey",
+      "tab": "for-sale",
+      "source_order": 6,
+      "operation": "sale",
+      "status_literal": "FOR SALE",
+      "status_normalised": "open",
+      "title": "Gorey Villas",
+      "locality": "Grouville",
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": 5,
+      "bathrooms": 3,
+      "figures": [
+        {
+          "type": "sale_price",
+          "amount": 925000,
+          "currency": "GBP",
+          "period": null,
+          "label_en": "Sale price",
+          "display_text": "£925,000",
+          "under_review": false
+        }
+      ],
+      "media": [
+        {
+          "public_path": "/media/listings/property-d763c60f7f77bb4a.jpg",
+          "width": 1920,
+          "height": 1440,
+          "alt": "Gorey Villas"
+        }
+      ],
+      "legal_notice": {
+        "disclaimer": "Please take note that no evaluations have been conducted on the appliances, fixtures, fittings, or services. Prospective parties are encouraged to conduct their own assessments regarding the operational condition of these components. All measurements are approximate, and the provided photographs are for illustrative purposes only.",
+        "aml": ""
+      },
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/residential-properties",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [
+        "property-1460e52cec0487c1",
+        "property-f26368c4227bf0d6",
+        "property-31086c7f7308da60"
+      ],
+      "calculator": {
+        "price_gbp": 925000
+      },
+      "demo": {
+        "aerial": null,
+        "tour3d": false
+      }
+    },
+    {
+      "public_id": "property-b6c1692a8fb9d273",
+      "section": "residential",
+      "geography": "jersey",
+      "tab": "for-sale",
+      "source_order": 7,
+      "operation": "sale",
+      "status_literal": "FOR SALE",
+      "status_normalised": "open",
+      "title": "Val Plaisant - 1st Floor Flat",
+      "locality": "St. Helier",
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": 2,
+      "bathrooms": 1,
+      "figures": [
+        {
+          "type": "sale_price",
+          "amount": 359000,
+          "currency": "GBP",
+          "period": null,
+          "label_en": "Sale price",
+          "display_text": "£359,000",
+          "under_review": false
+        }
+      ],
+      "media": [
+        {
+          "public_path": "/media/listings/property-b6c1692a8fb9d273.jpg",
+          "width": 1170,
+          "height": 794,
+          "alt": "Val Plaisant - 1st Floor Flat"
+        }
+      ],
+      "legal_notice": {
+        "disclaimer": "These particulars do not form part of a contract and whilst every care is taken to ensure their accuracy, Hampton Estates cannot be held responsible for any error or omission that may arise. All viewings are strictly through the offices of Hampton Estates.",
+        "aml": ""
+      },
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/residential-properties",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [
+        "property-0014bb83e1a51d32"
+      ],
+      "calculator": {
+        "price_gbp": 359000
+      },
+      "demo": {
+        "aerial": null,
+        "tour3d": false
+      }
+    },
+    {
+      "public_id": "property-1460e52cec0487c1",
+      "section": "residential",
+      "geography": "jersey",
+      "tab": "for-sale",
+      "source_order": 8,
+      "operation": "sale",
+      "status_literal": "FOR SALE",
+      "status_normalised": "open",
+      "title": "Le Grand Pre",
+      "locality": "Grouville",
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "figures": [
+        {
+          "type": "sale_price",
+          "amount": 845000,
+          "currency": "GBP",
+          "period": null,
+          "label_en": "Sale price",
+          "display_text": "£845,000",
+          "under_review": false
+        }
+      ],
+      "media": [
+        {
+          "public_path": "/media/listings/property-1460e52cec0487c1.jpg",
+          "width": 1799,
+          "height": 1200,
+          "alt": "Le Grand Pre"
+        }
+      ],
+      "legal_notice": {
+        "disclaimer": "These particulars do not form part of a contract and whilst every care is taken to ensure their accuracy, Hampton Estates cannot be held responsible for any error or omission that may arise. All viewings are strictly through the offices of Hampton Estates.",
+        "aml": ""
+      },
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/residential-properties",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [
+        "property-f26368c4227bf0d6",
+        "property-31086c7f7308da60",
+        "property-d763c60f7f77bb4a"
+      ],
+      "calculator": {
+        "price_gbp": 845000
+      },
+      "demo": {
+        "aerial": null,
+        "tour3d": false
+      }
+    },
+    {
+      "public_id": "property-ff3d8517b83ee0ae",
+      "section": "residential",
+      "geography": "jersey",
+      "tab": "for-sale",
+      "source_order": 9,
+      "operation": "sale",
+      "status_literal": "",
+      "status_normalised": "none",
+      "title": "Spacious 4 Bedroom Family Home",
+      "locality": "St Helier",
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": 4,
+      "bathrooms": 2,
+      "figures": [
+        {
+          "type": "sale_price",
+          "amount": null,
+          "currency": null,
+          "period": null,
+          "label_en": "Sale price",
+          "display_text": "",
+          "under_review": false
+        }
+      ],
+      "media": [
+        {
+          "public_path": "/media/listings/property-ff3d8517b83ee0ae.jpg",
+          "width": 1151,
+          "height": 768,
+          "alt": "Spacious 4 Bedroom Family Home"
+        }
+      ],
+      "legal_notice": {
+        "disclaimer": "These particulars do not form part of a contract and whilst every care is taken to ensure their accuracy, Hampton Estates cannot be held responsible for any error or omission that may arise. All viewings are strictly through the offices of Hampton Estates.",
+        "aml": ""
+      },
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/residential-properties",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [],
+      "calculator": null,
+      "demo": {
+        "aerial": null,
+        "tour3d": false
+      }
+    },
+    {
+      "public_id": "property-067a4141b1300520",
+      "section": "residential",
+      "geography": "jersey",
+      "tab": "for-sale",
+      "source_order": 10,
+      "operation": "sale",
+      "status_literal": "FOR SALE",
+      "status_normalised": "open",
+      "title": "Bay View - Spain, Galicia",
+      "locality": "Galicia, Spain",
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": 4,
+      "bathrooms": 2,
+      "figures": [
+        {
+          "type": "sale_price",
+          "amount": 136000,
+          "currency": "GBP",
+          "period": null,
+          "label_en": "Sale price",
+          "display_text": "£136,000",
+          "under_review": false
+        }
+      ],
+      "media": [
+        {
+          "public_path": "/media/listings/property-067a4141b1300520.jpg",
+          "width": 800,
+          "height": 600,
+          "alt": "Bay View - Spain, Galicia"
+        }
+      ],
+      "legal_notice": {
+        "disclaimer": "These particulars do not form part of a contract and whilst every care is taken to ensure their accuracy, Hampton Estates cannot be held responsible for any error or omission that may arise. All viewings are strictly through the offices of Hampton Estates.",
+        "aml": ""
+      },
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/residential-properties",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [
+        "property-ffa4c2ddbc46b5b7"
+      ],
+      "calculator": {
+        "price_gbp": 136000
+      },
+      "demo": {
+        "aerial": null,
+        "tour3d": false
+      }
+    },
+    {
+      "public_id": "property-8d5430b66f20edb8",
+      "section": "residential",
+      "geography": "jersey",
+      "tab": "for-sale",
+      "source_order": 11,
+      "operation": "sale",
+      "status_literal": "FOR SALE",
+      "status_normalised": "open",
+      "title": "Ferreira do Alentejo",
+      "locality": "Alentejo, Portugal",
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "figures": [
+        {
+          "type": "sale_price",
+          "amount": 250000,
+          "currency": "GBP",
+          "period": null,
+          "label_en": "Sale price",
+          "display_text": "£250,000",
+          "under_review": false
+        }
+      ],
+      "media": [
+        {
+          "public_path": "/media/listings/property-8d5430b66f20edb8.jpg",
+          "width": 1024,
+          "height": 768,
+          "alt": "Ferreira do Alentejo"
+        }
+      ],
+      "legal_notice": {
+        "disclaimer": "These particulars do not form part of a contract and whilst every care is taken to ensure their accuracy, Hampton Estates cannot be held responsible for any error or omission that may arise. All viewings are strictly through the offices of Hampton Estates.",
+        "aml": ""
+      },
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/residential-properties",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [
+        "property-0014bb83e1a51d32"
+      ],
+      "calculator": {
+        "price_gbp": 250000
+      },
+      "demo": {
+        "aerial": null,
+        "tour3d": false
+      }
+    },
+    {
+      "public_id": "property-466163cacb120457",
+      "section": "residential",
+      "geography": "jersey",
+      "tab": "for-sale",
+      "source_order": 12,
+      "operation": "sale",
+      "status_literal": "FOR SALE",
+      "status_normalised": "open",
+      "title": "Louargat",
+      "locality": "Brittany, France",
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": null,
+      "bathrooms": null,
+      "figures": [
+        {
+          "type": "sale_price",
+          "amount": 87000,
+          "currency": "GBP",
+          "period": null,
+          "label_en": "Sale price",
+          "display_text": "£87,000",
+          "under_review": false
+        }
+      ],
+      "media": [
+        {
+          "public_path": "/media/listings/property-466163cacb120457.jpg",
+          "width": 640,
+          "height": 480,
+          "alt": "Louargat"
+        }
+      ],
+      "legal_notice": {
+        "disclaimer": "These particulars do not form part of a contract and whilst every care is taken to ensure their accuracy, Hampton Estates cannot be held responsible for any error or omission that may arise. All viewings are strictly through the offices of Hampton Estates.",
+        "aml": ""
+      },
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/residential-properties",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [],
+      "calculator": {
+        "price_gbp": 87000
+      },
+      "demo": {
+        "aerial": null,
+        "tour3d": false
+      }
+    },
+    {
+      "public_id": "property-0014bb83e1a51d32",
+      "section": "residential",
+      "geography": "jersey",
+      "tab": "for-sale",
+      "source_order": 13,
+      "operation": "sale",
+      "status_literal": "FOR SALE",
+      "status_normalised": "open",
+      "title": "Loudeac",
+      "locality": "Brittany, France",
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": 7,
+      "bathrooms": 2,
+      "figures": [
+        {
+          "type": "sale_price",
+          "amount": 300000,
+          "currency": "GBP",
+          "period": null,
+          "label_en": "Sale price",
+          "display_text": "£300,000",
+          "under_review": false
+        }
+      ],
+      "media": [
+        {
+          "public_path": "/media/listings/property-0014bb83e1a51d32.jpg",
+          "width": 640,
+          "height": 480,
+          "alt": "Loudeac"
+        }
+      ],
+      "legal_notice": {
+        "disclaimer": "These particulars do not form part of a contract and whilst every care is taken to ensure their accuracy, Hampton Estates cannot be held responsible for any error or omission that may arise. All viewings are strictly through the offices of Hampton Estates.",
+        "aml": ""
+      },
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/residential-properties",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [
+        "property-8d5430b66f20edb8",
+        "property-b6c1692a8fb9d273"
+      ],
+      "calculator": {
+        "price_gbp": 300000
+      },
+      "demo": {
+        "aerial": null,
+        "tour3d": false
+      }
+    },
+    {
+      "public_id": "property-ffa4c2ddbc46b5b7",
+      "section": "residential",
+      "geography": "jersey",
+      "tab": "for-sale",
+      "source_order": 14,
+      "operation": "sale",
+      "status_literal": "FOR SALE",
+      "status_normalised": "open",
+      "title": "Lourinha E Atalaia",
+      "locality": "Lourinha, Portugal",
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": 5,
+      "bathrooms": 2,
+      "figures": [
+        {
+          "type": "sale_price",
+          "amount": 148000,
+          "currency": "GBP",
+          "period": null,
+          "label_en": "Sale price",
+          "display_text": "£148,000",
+          "under_review": false
+        }
+      ],
+      "media": [
+        {
+          "public_path": "/media/listings/property-ffa4c2ddbc46b5b7.jpg",
+          "width": 1200,
+          "height": 675,
+          "alt": "Lourinha E Atalaia"
+        }
+      ],
+      "legal_notice": {
+        "disclaimer": "These particulars do not form part of a contract and whilst every care is taken to ensure their accuracy, Hampton Estates cannot be held responsible for any error or omission that may arise. All viewings are strictly through the offices of Hampton Estates.",
+        "aml": ""
+      },
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/residential-properties",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [
+        "property-067a4141b1300520"
+      ],
+      "calculator": {
+        "price_gbp": 148000
+      },
+      "demo": {
+        "aerial": null,
+        "tour3d": false
+      }
+    },
+    {
+      "public_id": "property-bd0fb7811d8541fe",
+      "section": "residential",
+      "geography": "jersey",
+      "tab": "for-sale",
+      "source_order": 15,
+      "operation": "sale",
+      "status_literal": "FOR SALE",
+      "status_normalised": "open",
+      "title": "Magnolia Gardens",
+      "locality": "St Lawerence",
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": 4,
+      "bathrooms": 3,
+      "figures": [
+        {
+          "type": "sale_price",
+          "amount": 1400000,
+          "currency": "GBP",
+          "period": null,
+          "label_en": "Sale price",
+          "display_text": "£1,400,000",
+          "under_review": false
+        }
+      ],
+      "media": [
+        {
+          "public_path": "/media/listings/property-bd0fb7811d8541fe.jpg",
+          "width": 594,
+          "height": 456,
+          "alt": "Magnolia Gardens"
+        }
+      ],
+      "legal_notice": {
+        "disclaimer": "These particulars do not form part of a contract and whilst every care is taken to ensure their accuracy, Hampton Estates cannot be held responsible for any error or omission that may arise. All viewings are strictly through the offices of Hampton Estates.",
+        "aml": ""
+      },
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/residential-properties",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [],
+      "calculator": {
+        "price_gbp": 1400000
+      },
+      "demo": {
+        "aerial": null,
+        "tour3d": false
+      }
+    },
+    {
+      "public_id": "property-372d796054e33d57",
+      "section": "residential",
+      "geography": "jersey",
+      "tab": "for-sale",
+      "source_order": 16,
+      "operation": "sale",
+      "status_literal": "FOR SALE",
+      "status_normalised": "open",
+      "title": "Manoir De Trevenou",
+      "locality": "Brittany, France",
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "figures": [
+        {
+          "type": "sale_price",
+          "amount": 574000,
+          "currency": "GBP",
+          "period": null,
+          "label_en": "Sale price",
+          "display_text": "£574,000.00",
+          "under_review": false
+        }
+      ],
+      "media": [
+        {
+          "public_path": "/media/listings/property-372d796054e33d57.jpg",
+          "width": 1032,
+          "height": 774,
+          "alt": "Manoir De Trevenou"
+        }
+      ],
+      "legal_notice": {
+        "disclaimer": "These particulars do not form part of a contract and whilst every care is taken to ensure their accuracy, Hampton Estates cannot be held responsible for any error or omission that may arise. All viewings are strictly through the offices of Hampton Estates.",
+        "aml": ""
+      },
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/residential-properties",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [
+        "property-0bb0a52c95e08de6",
+        "property-31d78e96d885d1ec"
+      ],
+      "calculator": {
+        "price_gbp": 574000
+      },
+      "demo": {
+        "aerial": null,
+        "tour3d": false
+      }
+    },
+    {
+      "public_id": "property-49cbc750fb181192",
+      "section": "residential",
+      "geography": "international",
+      "tab": "international",
+      "source_order": 0,
+      "operation": "sale",
+      "status_literal": "FOR SALE",
+      "status_normalised": "open",
+      "title": "Pathfield Road, Streatham, London",
+      "locality": "London",
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": 2,
+      "bathrooms": 1,
+      "figures": [
+        {
+          "type": "sale_price",
+          "amount": 450000,
+          "currency": "GBP",
+          "period": null,
+          "label_en": "Sale price",
+          "display_text": "£450,000",
+          "under_review": false
+        }
+      ],
+      "media": [
+        {
+          "public_path": "/media/listings/property-49cbc750fb181192.png",
+          "width": 637,
+          "height": 393,
+          "alt": "Pathfield Road, Streatham, London"
+        }
+      ],
+      "legal_notice": {
+        "disclaimer": "These particulars do not form part of a contract and whilst every care is taken to ensure their accuracy, Hampton Estates cannot be held responsible for any error or omission that may arise. All viewings are strictly through the offices of Hampton Estates.",
+        "aml": ""
+      },
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/residential-properties",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [],
+      "calculator": {
+        "price_gbp": 450000
+      },
+      "demo": {
+        "aerial": null,
+        "tour3d": false
+      }
+    },
+    {
+      "public_id": "property-290d0f11ae13cbb5",
+      "section": "residential",
+      "geography": "jersey",
+      "tab": "sold-let",
+      "source_order": 0,
+      "operation": "sale",
+      "status_literal": "SOLD",
+      "status_normalised": "closed",
+      "title": "25 Roseville Street",
+      "locality": "St Helier",
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": 6,
+      "bathrooms": 4,
+      "figures": [
+        {
+          "type": "sale_price",
+          "amount": 875000,
+          "currency": "GBP",
+          "period": null,
+          "label_en": "Sale price",
+          "display_text": "£875,000",
+          "under_review": false
+        }
+      ],
+      "media": [
+        {
+          "public_path": "/media/listings/property-290d0f11ae13cbb5.jpg",
+          "width": 477,
+          "height": 512,
+          "alt": "25 Roseville Street"
+        }
+      ],
+      "legal_notice": {
+        "disclaimer": "These particulars do not form part of a contract and whilst every care is taken to ensure their accuracy, Hampton Estates cannot be held responsible for any error or omission that may arise. All viewings are strictly through the offices of Hampton Estates.",
+        "aml": ""
+      },
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/residential-properties",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [],
+      "calculator": null,
+      "demo": {
+        "aerial": null,
+        "tour3d": false
+      }
+    },
+    {
+      "public_id": "property-7e763308c447d091",
+      "section": "residential",
+      "geography": "jersey",
+      "tab": "sold-let",
+      "source_order": 1,
+      "operation": "sale",
+      "status_literal": "SOLD",
+      "status_normalised": "closed",
+      "title": "Grosvenor Street",
+      "locality": "St Helier",
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": 2,
+      "bathrooms": 1,
+      "figures": [
+        {
+          "type": "sale_price",
+          "amount": 485000,
+          "currency": "GBP",
+          "period": null,
+          "label_en": "Sale price",
+          "display_text": "£485,000",
+          "under_review": false
+        }
+      ],
+      "media": [
+        {
+          "public_path": "/media/listings/property-7e763308c447d091.png",
+          "width": 617,
+          "height": 461,
+          "alt": "Grosvenor Street"
+        }
+      ],
+      "legal_notice": {
+        "disclaimer": "These particulars do not form part of a contract and whilst every care is taken to ensure their accuracy, Hampton Estates cannot be held responsible for any error or omission that may arise. All viewings are strictly through the offices of Hampton Estates.",
+        "aml": ""
+      },
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/residential-properties",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [],
+      "calculator": null,
+      "demo": {
+        "aerial": null,
+        "tour3d": false
+      }
+    },
+    {
+      "public_id": "property-efd28b7cd79fc470",
+      "section": "residential",
+      "geography": "jersey",
+      "tab": "sold-let",
+      "source_order": 2,
+      "operation": "sale",
+      "status_literal": "SOLD",
+      "status_normalised": "closed",
+      "title": "Garden Lane",
+      "locality": "St Helier",
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": 1,
+      "bathrooms": 1,
+      "figures": [
+        {
+          "type": "sale_price",
+          "amount": 300000,
+          "currency": "GBP",
+          "period": null,
+          "label_en": "Sale price",
+          "display_text": "£300,000",
+          "under_review": false
+        }
+      ],
+      "media": [
+        {
+          "public_path": "/media/listings/property-efd28b7cd79fc470.jpg",
+          "width": 442,
+          "height": 512,
+          "alt": "Garden Lane"
+        }
+      ],
+      "legal_notice": {
+        "disclaimer": "These particulars do not form part of a contract and whilst every care is taken to ensure their accuracy, Hampton Estates cannot be held responsible for any error or omission that may arise. All viewings are strictly through the offices of Hampton Estates.",
+        "aml": ""
+      },
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/residential-properties",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [],
+      "calculator": null,
+      "demo": {
+        "aerial": null,
+        "tour3d": false
+      }
+    },
+    {
+      "public_id": "property-c3ca2ed403d3cf16",
+      "section": "residential",
+      "geography": "jersey",
+      "tab": "sold-let",
+      "source_order": 3,
+      "operation": "sale",
+      "status_literal": "Sold",
+      "status_normalised": "closed",
+      "title": "Great Business Opportunity",
+      "locality": "St Helier",
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": 6,
+      "bathrooms": 3,
+      "figures": [
+        {
+          "type": "sale_price",
+          "amount": 875000,
+          "currency": "GBP",
+          "period": null,
+          "label_en": "Sale price",
+          "display_text": "£875,000",
+          "under_review": false
+        }
+      ],
+      "media": [
+        {
+          "public_path": "/media/listings/property-c3ca2ed403d3cf16.jpg",
+          "width": 477,
+          "height": 512,
+          "alt": "Great Business Opportunity"
+        }
+      ],
+      "legal_notice": {
+        "disclaimer": "These particulars do not form part of a contract and whilst every care is taken to ensure their accuracy, Hampton Estates cannot be held responsible for any error or omission that may arise. All viewings are strictly through the offices of Hampton Estates.",
+        "aml": ""
+      },
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/residential-properties",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [],
+      "calculator": null,
+      "demo": {
+        "aerial": null,
+        "tour3d": false
+      }
+    },
+    {
+      "public_id": "property-2c9578573d11efcd",
+      "section": "residential",
+      "geography": "jersey",
+      "tab": "to-let",
+      "source_order": 0,
+      "operation": "rent",
+      "status_literal": "TO LET",
+      "status_normalised": "open",
+      "title": "Trinity rental",
+      "locality": "Trinity",
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": 2,
+      "bathrooms": 1,
+      "figures": [
+        {
+          "type": "rent",
+          "amount": 1900,
+          "currency": "GBP",
+          "period": "month",
+          "label_en": "Rent",
+          "display_text": "£1,900 per month (negotiable)",
+          "under_review": false
+        }
+      ],
+      "media": [
+        {
+          "public_path": "/media/listings/trinity-main.avif",
+          "width": 415,
+          "height": 415,
+          "alt": "Stone cottage exterior with dormer windows"
+        }
+      ],
+      "legal_notice": {
+        "disclaimer": "These particulars do not form part of a contract and whilst every care is taken to ensure their accuracy, Hampton Estates cannot be held responsible for any error or omission that may arise. All viewings are strictly through the offices of Hampton Estates.",
+        "aml": ""
+      },
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/residential-properties",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [],
+      "calculator": null,
+      "demo": {
+        "aerial": null,
+        "tour3d": false
+      }
+    },
+    {
+      "public_id": "property-f8ffa0693d720119",
+      "section": "residential",
+      "geography": "jersey",
+      "tab": "to-let",
+      "source_order": 1,
+      "operation": "rent",
+      "status_literal": "To Let",
+      "status_normalised": "open",
+      "title": "3 Sheilings, Gorey",
+      "locality": "Grouville",
+      "description_public": null,
+      "description_withheld": false,
+      "bedrooms": 4,
+      "bathrooms": 3,
+      "figures": [
+        {
+          "type": "rent",
+          "amount": 2800,
+          "currency": "GBP",
+          "period": null,
+          "label_en": "Rent",
+          "display_text": "£2,800pm",
+          "under_review": false
+        }
+      ],
+      "media": [
+        {
+          "public_path": "/media/listings/property-f8ffa0693d720119.jpg",
+          "width": 1920,
+          "height": 1635,
+          "alt": "3 Sheilings, Gorey"
+        }
+      ],
+      "legal_notice": {
+        "disclaimer": "Please take note that no evaluations have been conducted on the appliances, fixtures, fittings, or services. Prospective parties are encouraged to conduct their own assessments regarding the operational condition of these components. All measurements are approximate, and the provided photographs are for illustrative purposes only.",
+        "aml": ""
+      },
+      "source": {
+        "url": "https://www.hamptonestatesjersey.com/residential-properties",
+        "retrieved_on": "2026-10-04"
+      },
+      "similar_ids": [],
+      "calculator": null,
+      "demo": {
+        "aerial": null,
+        "tour3d": false
+      }
+    }
+  ],
+  "agents": [
+    {
+      "public_id": "gilberto-franco",
+      "name": "GILBERTO FRANCO",
+      "role": "Managing Director",
+      "phones": [
+        "07797 718199",
+        "01534 727582"
+      ],
+      "email": "francopropertiesjersey@gmail.com",
+      "portrait": {
+        "public_path": "/media/team/team-gilberto.jpg",
+        "width": 284,
+        "height": 268,
+        "alt": "Gilberto Franco, Managing Director"
+      }
+    },
+    {
+      "public_id": "joshua-franco",
+      "name": "JOSHUA FRANCO",
+      "role": "Negotiator",
+      "phones": [
+        "01534 727582"
+      ],
+      "email": "francopropertiesjersey@gmail.com",
+      "portrait": {
+        "public_path": "/media/team/team-joshua.jpg",
+        "width": 283,
+        "height": 271,
+        "alt": "Joshua Franco, Negotiator"
+      }
+    }
+  ],
+  "tour3d": {
+    "provider_origin": "https://sketchfab.com",
+    "embed_url": "https://sketchfab.com/models/6fc3a756dacd40af8c6e4e3b8e674ea2/embed?dnt=1",
+    "model_title": "Small Villa",
+    "author": "RenderRite",
+    "author_url": "https://sketchfab.com/3d-models/small-villa-6fc3a756dacd40af8c6e4e3b8e674ea2",
+    "model_uid": "6fc3a756dacd40af8c6e4e3b8e674ea2",
+    "licence": "CC BY 4.0",
+    "licence_url": "https://creativecommons.org/licenses/by/4.0/",
+    "evidence_ref": "R-12",
+    "label_en": "Example - not this property",
+    "guided_stops": [
+      {
+        "id": "kitchen",
+        "label_en": "Kitchen",
+        "eye": [
+          8.25580423150107,
+          9.382430095397412,
+          2.5048608996703736
+        ],
+        "target": [
+          7.633829116821289,
+          10.372058866798312,
+          1.8075980370216995
+        ]
+      },
+      {
+        "id": "office",
+        "label_en": "Office",
+        "eye": [
+          10.94138759308494,
+          9.82666635007771,
+          2.061231501346832
+        ],
+        "target": [
+          10.195893176284622,
+          9.243845664935188,
+          1.7293951521987645
+        ]
+      },
+      {
+        "id": "bathroom",
+        "label_en": "Bathroom",
+        "eye": [
+          10.774574918809732,
+          9.623196695936981,
+          2.375141243767048
+        ],
+        "target": [
+          12.432980950806076,
+          8.29112077457784,
+          1.0260039567947388
+        ]
+      },
+      {
+        "id": "laundry",
+        "label_en": "Laundry",
+        "eye": [
+          10.774574918809732,
+          9.623196695936981,
+          2.375141243767048
+        ],
+        "target": [
+          12.711393777137562,
+          9.282104208441256,
+          1.8700034618377686
+        ]
+      },
+      {
+        "id": "master-bedroom",
+        "label_en": "Master Bedroom",
+        "eye": [
+          9.916367353194616,
+          9.0250351511187,
+          4.132579287403914
+        ],
+        "target": [
+          11.474254025664205,
+          9.343121245039875,
+          3.7200043201446533
+        ]
+      }
+    ],
+    "transit_waypoints": [
+      {
+        "after_stop": "laundry",
+        "eye": [
+          9.833590821526824,
+          8.107527623186751,
+          2.7168127651083074
+        ],
+        "target": [
+          9.550029754638672,
+          8.416084194122718,
+          2.4501172243589524
+        ]
+      }
+    ]
+  }
+}

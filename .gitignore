@@ -76,5 +76,6 @@ tests/e2e/private/
 # Maquetas con datos reales importados (D-078): solo en local, nunca en git
 docs/mockups/private/
 
-# Fotografias publicas autorizadas para la preview local: no versionar ni publicar
+# Caché fotográfica privada local; las imágenes expresamente autorizadas para
+# publicación viven por separado en public/media/.
 public/preview-private/
