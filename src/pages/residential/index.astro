@@ -30,15 +30,17 @@ const contactHref = contactListing ? `/property/${contactListing.public_id}/#boo
         <a class="button" href={`/property/${tourListing.public_id}/#external-example`}>Open the 3D example</a>
       </aside>
     )}
-    <div class="catalogue-filters" role="tablist" aria-label="Residential property sections">
-      <button type="button" role="tab" aria-selected="true" data-filter="for-sale">For sale</button>
-      <button type="button" role="tab" aria-selected="false" data-filter="to-let">To let</button>
-      <button type="button" role="tab" aria-selected="false" data-filter="sold-let">Sold / Let</button>
-      <button type="button" role="tab" aria-selected="false" data-filter="international">International</button>
-    </div>
-    <div class="catalogue-bar">
-      <p data-catalogue-count></p>
-      <p class="muted">Dated snapshot - local demo preview</p>
+    <div class="catalogue-toolbar">
+      <div class="catalogue-filters" role="group" aria-label="Residential property sections">
+        <button type="button" aria-pressed="true" data-filter="for-sale">For sale</button>
+        <button type="button" aria-pressed="false" data-filter="to-let">To let</button>
+        <button type="button" aria-pressed="false" data-filter="sold-let">Sold / Let</button>
+        <button type="button" aria-pressed="false" data-filter="international">International</button>
+      </div>
+      <div class="catalogue-bar">
+        <p data-catalogue-count role="status" aria-live="polite"></p>
+        <p class="muted">Curated source order</p>
+      </div>
     </div>
     <div class="property-grid">
       {listings.map(listing => (
@@ -63,7 +65,7 @@ const contactHref = contactListing ? `/property/${contactListing.public_id}/#boo
         card.hidden = card.dataset.tab !== tab;
         if (!card.hidden) visible += 1;
       }
-      for (const button of buttons) button.setAttribute('aria-selected', String(button.dataset.filter === tab));
+      for (const button of buttons) button.setAttribute('aria-pressed', String(button.dataset.filter === tab));
       if (count) count.textContent = `${visible} ${visible === 1 ? 'property' : 'properties'}`;
       if (empty) empty.hidden = visible !== 0;
     };
@@ -95,19 +97,25 @@ const contactHref = contactListing ? `/property/${contactListing.public_id}/#boo
     font-size: 0.85rem;
   }
 
+  .catalogue-toolbar {
+    display: grid;
+    gap: 0.75rem 1.25rem;
+    margin-bottom: 1.5rem;
+    padding: 0.75rem;
+    border: 1px solid var(--line);
+    background: #fff;
+  }
+
   .catalogue-filters {
     display: flex;
-    gap: 0 1.5rem;
+    gap: 0.35rem;
     flex-wrap: wrap;
-    margin-bottom: 1.5rem;
-    border-bottom: 1px solid var(--line);
   }
 
   .catalogue-filters button {
     min-height: 44px;
-    padding: 0.65rem 0;
-    border: 0;
-    border-bottom: 3px solid transparent;
+    padding: 0.55rem 0.75rem;
+    border: 1px solid transparent;
     background: transparent;
     color: var(--ink);
     cursor: pointer;
@@ -115,15 +123,43 @@ const contactHref = contactListing ? `/property/${contactListing.public_id}/#boo
     font-weight: 700;
   }
 
-  .catalogue-filters button[aria-selected="true"] {
-    border-bottom-color: var(--brand-deep);
-    background: transparent;
-    color: var(--brand-deep);
+  .catalogue-filters button[aria-pressed="true"] {
+    border-color: var(--brand-deep);
+    background: var(--brand-deep);
+    color: #fff;
   }
 
   .catalogue-filters button:focus-visible {
     outline: 2px solid var(--brand-deep);
     outline-offset: 2px;
+  }
+
+  .catalogue-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin: 0;
+    padding-block: 0;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .catalogue-bar p:first-child { font-weight: 800; }
+
+  @media (min-width: 760px) {
+    .catalogue-toolbar {
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+    }
+
+    .catalogue-bar {
+      min-width: 17rem;
+      padding-top: 0;
+      padding-left: 1.25rem;
+      border-top: 0;
+      border-left: 1px solid var(--line);
+    }
   }
 
   [data-residential-card] {

@@ -50,6 +50,14 @@ describe('mortgage calculator component', () => {
     expect(source).toMatch(/\.deposit-mode label\s*\{[\s\S]*?min-height:\s*2\.75rem/);
   });
 
+  it('groups purchase inputs separately from illustrative loan assumptions', () => {
+    const source = componentSource();
+
+    expect(source).toMatch(/<fieldset class="calculator-group"[\s\S]*?<legend>Purchase details<\/legend>/);
+    expect(source).toMatch(/<fieldset class="calculator-group"[\s\S]*?<legend>Illustrative loan<\/legend>/);
+    expect(source).toMatch(/\.calculator-group\s*\{[\s\S]*?display:\s*grid/);
+  });
+
   it('keeps the advice boundary beside the primary result and makes assumptions secondary', () => {
     const source = componentSource();
 

@@ -38,7 +38,7 @@ describe('public repository snapshot', () => {
     );
   });
 
-  it('references exactly the 45 approved versioned photographs and no private path', () => {
+  it('references the 44 approved photographs without the duplicate Victoria crop or a private path', () => {
     const data = publicSnapshot();
     const paths = [
       ...data.listings.flatMap(listing => listing.media.map(media => media.public_path)),
@@ -46,7 +46,10 @@ describe('public repository snapshot', () => {
     ];
     const photographs = [...new Set(paths.filter(path => !path.startsWith('/illustrations/')))];
 
-    expect(photographs).toHaveLength(45);
+    expect(photographs).toHaveLength(44);
+    expect(data.listings.find(listing => listing.public_id === 'property-31d78e96d885d1ec')?.media)
+      .toHaveLength(1);
+    expect(photographs).not.toContain('/media/listings/victoria-card.avif');
     for (const path of photographs) {
       expect(path).toMatch(/^\/media\/(?:listings|team)\/[a-z0-9.-]+$/);
       expect(path).not.toContain('preview-private');

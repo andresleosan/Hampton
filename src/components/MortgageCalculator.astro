@@ -29,7 +29,9 @@ const initialPrice = calculator
     <div class="calculator-layout">
       <form id="mortgage-form" class="mortgage-form" novalidate autocomplete="off">
         <div class="calculator-fields">
-          <div class="field">
+          <fieldset class="calculator-group">
+            <legend>Purchase details</legend>
+            <div class="field">
             <label for="mortgage-price">Price</label>
             <span class="input-shell" data-prefix="£">
               <input
@@ -45,7 +47,7 @@ const initialPrice = calculator
             <p id="mortgage-price-error" class="field-error" aria-live="polite"></p>
           </div>
 
-          <div class="field field--deposit">
+            <div class="field field--deposit">
             <label id="mortgage-deposit-label" for="mortgage-deposit">Deposit</label>
             <div class="deposit-control">
               <span class="input-shell input-shell--suffix">
@@ -76,9 +78,12 @@ const initialPrice = calculator
             </div>
             <p id="mortgage-deposit-hint" class="field-hint">Initial value: 10% deposit - illustrative and editable.</p>
             <p id="mortgage-deposit-error" class="field-error" aria-live="polite"></p>
-          </div>
+            </div>
+          </fieldset>
 
-          <div class="field">
+          <fieldset class="calculator-group">
+            <legend>Illustrative loan</legend>
+            <div class="field">
             <label for="mortgage-rate">Annual interest rate</label>
             <span class="input-shell input-shell--suffix">
               <input
@@ -98,7 +103,7 @@ const initialPrice = calculator
             <p id="mortgage-rate-error" class="field-error" aria-live="polite"></p>
           </div>
 
-          <div class="field">
+            <div class="field">
             <label for="mortgage-years">Mortgage term</label>
             <span class="input-shell input-shell--suffix">
               <input
@@ -113,7 +118,8 @@ const initialPrice = calculator
             </span>
             <p id="mortgage-years-hint" class="field-hint">Initial value: 25-year term - illustrative and editable.</p>
             <p id="mortgage-years-error" class="field-error" aria-live="polite"></p>
-          </div>
+            </div>
+          </fieldset>
         </div>
 
         <p id="mortgage-errors" class="error-summary" role="status" aria-live="polite"></p>
@@ -341,6 +347,25 @@ const initialPrice = calculator
     min-width: 0;
   }
 
+  .calculator-group {
+    display: grid;
+    min-width: 0;
+    gap: 1rem;
+    margin: 0;
+    padding: 1rem;
+    border: 1px solid var(--line, #c8c9c5);
+    background: var(--paper, #f6f4ef);
+  }
+
+  .calculator-group > legend {
+    padding-inline: 0.4rem;
+    color: var(--brand-deep, #1f4e78);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
   .mortgage-form .field {
     margin: 0;
     min-width: 0;
@@ -553,11 +578,14 @@ const initialPrice = calculator
   }
 
   .mortgage-totals dd {
+    flex: 0 0 auto;
     margin: 0;
     font-weight: 700;
     text-align: right;
-    overflow-wrap: anywhere;
+    white-space: nowrap;
   }
+
+  .mortgage-totals dt { min-width: 0; overflow-wrap: anywhere; }
 
   .rounding-note,
   .privacy-note {
@@ -622,9 +650,11 @@ const initialPrice = calculator
       grid-template-columns: minmax(7rem, 1fr) auto;
     }
 
-    .calculator-fields {
+    .calculator-group {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+
+    .calculator-group > legend { grid-column: 1 / -1; }
   }
 
   @media (min-width: 920px) {

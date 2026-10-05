@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import type { PublicListing } from '../../src/domain/public-contract.ts';
 import { commercialListings, featuredResidential, figurePeriodLabel, residentialTab } from '../../src/domain/catalogue.ts';
@@ -43,5 +44,23 @@ describe('public catalogue selectors', () => {
       type: 'rent', amount: 1, currency: 'GBP', period: 'month', label_en: 'Rent',
       display_text: '£1,000 PCM', under_review: false,
     })).toBeNull();
+  });
+});
+
+describe('residential catalogue presentation', () => {
+  it('uses a compact catalogue toolbar with visible count and ordering context', () => {
+    const source = readFileSync('src/pages/residential/index.astro', 'utf8');
+
+    expect(source).toContain('class="catalogue-toolbar"');
+    expect(source).toContain('data-catalogue-count');
+    expect(source).toContain('Curated source order');
+  });
+
+  it('puts price and facts together before the editorial listing detail', () => {
+    const source = readFileSync('src/components/PropertyCard.astro', 'utf8');
+
+    expect(source).toContain('class="card-price-row"');
+    expect(source).toContain('class="card-facts"');
+    expect(source.indexOf('class="card-price-row"')).toBeLessThan(source.indexOf('<h2>'));
   });
 });

@@ -1,12 +1,17 @@
 ---
 import type { PublicListing } from '../domain/public-contract.ts';
+import { figurePeriodLabel } from '../domain/catalogue.ts';
 import { listingLabel } from '../data/preview.ts';
+
 interface Props { listing: PublicListing; showTour: boolean }
+
 const { listing, showTour } = Astro.props;
 const image = listing.media[0];
 const primaryFigure = listing.figures[0];
+const periodLabel = primaryFigure ? figurePeriodLabel(primaryFigure) : null;
 const mediaCanCover = image.width >= 480 && image.height >= 360;
 ---
+
 <article class="property-card">
   <a href={`/property/${listing.public_id}/`}>
     <div class="card-image">
@@ -22,12 +27,25 @@ const mediaCanCover = image.width >= 480 && image.height >= 360;
       <span class="card-status">{listing.status_literal}</span>
     </div>
     <div class="card-content">
+      <div class="card-price-row">
+        <p class="price">
+          {primaryFigure?.display_text ?? 'Price not published'}
+          {periodLabel && <small>{periodLabel}</small>}
+        </p>
+        {(listing.bedrooms !== null || listing.bathrooms !== null) && (
+          <p class="card-facts" aria-label="Published property facts">
+            {listing.bedrooms !== null && <span>{listing.bedrooms} bed</span>}
+            {listing.bathrooms !== null && <span>{listing.bathrooms} bath</span>}
+          </p>
+        )}
+      </div>
       <h2>{listing.title}</h2>
-      <p class="muted">{listing.locality}</p>
-      <p>{listing.bedrooms ?? 'Not published'} bed <span aria-hidden="true">·</span> {listing.bathrooms ?? 'Not published'} bath</p>
+      <p class="muted">{listing.locality ?? 'Location not published'}</p>
       {showTour && <p class="tour-marker">Separate 3D example available</p>}
-      <div class="card-bottom"><span class="price">{primaryFigure?.display_text ?? 'Price not published'}</span><span class="card-link">View property <span aria-hidden="true">↗</span></span></div>
-      <p class="demo-label">{listingLabel(listing)}</p>
+      <div class="card-footer">
+        <p class="demo-label">{listingLabel(listing)}</p>
+        <span class="card-link">View property <span aria-hidden="true">&nearr;</span></span>
+      </div>
     </div>
   </a>
 </article>

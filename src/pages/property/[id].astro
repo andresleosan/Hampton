@@ -27,51 +27,100 @@ interface Props {
 
 const { listing, listings, agents, tour3d } = Astro.props;
 const image = listing.media[0];
+const additionalMedia = listing.media.slice(1);
 const primaryFigure = listing.figures[0];
 const propertyCanCover = image.width >= 1280 && image.height >= 800 && image.width / image.height >= 1.25;
 const showTour = listing.demo.tour3d && tour3d;
 const backHref = listing.section === 'commercial' ? '/commercial/' : '/residential/';
 const backLabel = listing.section === 'commercial' ? 'commercial' : 'residential';
 const provenanceLabel = listing.source
-  ? 'Real listing snapshot · published property details'
-  : 'Synthetic fallback · fictional property details';
+  ? 'Real listing snapshot - published property details'
+  : 'Synthetic fallback - fictional property details';
+const hasPublishedFacts = listing.bedrooms !== null || listing.bathrooms !== null;
 ---
 
 <SiteLayout title={listing.title} description={`${listing.title} - ${listingLabel(listing)}.`} contactHref="#booking">
-  <div class="wrap"><a class="back-link" href={backHref}>← Back to {backLabel}</a></div>
+  <div class="wrap"><a class="back-link" href={backHref}>&larr; Back to {backLabel}</a></div>
 
-  <section class="property-heading wrap">
-    <div>
-      <p class="eyebrow">{listing.status_literal}</p>
-      <h1>{listing.title}</h1>
-      <p class="intro-copy">{listing.locality ?? 'Location not published'}</p>
-      <p class="demo-label">{listingLabel(listing)}</p>
-    </div>
-    {listing.section === 'residential' && primaryFigure && (
-      <div class="heading-price">
-        <span class="eyebrow">{primaryFigure.label_en}</span>
-        <p>{primaryFigure.display_text}</p>
+  <section class="property-hero wrap" aria-labelledby="property-title">
+    <div class="property-gallery" data-property-gallery data-gallery-items={JSON.stringify(listing.media)}>
+      <div
+        class:list={['property-art', propertyCanCover ? 'property-art--cover' : 'property-art--intrinsic']}
+        style={`--property-media-width:${image.width}px`}
+      >
+        <button class="property-photo-frame" type="button" data-gallery-open data-gallery-index="0" aria-label={`Open photograph 1 of ${listing.media.length}`}>
+          <img
+            class:list={[propertyCanCover ? 'media--cover' : 'media--intrinsic']}
+            style={`--image-width:${image.width}px`}
+            src={image.public_path}
+            alt={image.alt}
+            width={image.width}
+            height={image.height}
+            fetchpriority="high"
+          />
+        </button>
       </div>
-    )}
-  </section>
+      {additionalMedia.length > 0 && (
+        <div class="property-thumbnails" aria-label="Additional property photographs">
+          {listing.media.slice(1).map((media, index) => (
+            <button type="button" data-gallery-open data-gallery-index={index + 1} aria-label={`Open photograph ${index + 2} of ${listing.media.length}`}>
+              <img
+                class="media--intrinsic"
+                style={`--image-width:${media.width}px`}
+                src={media.public_path}
+                alt=""
+                width={media.width}
+                height={media.height}
+                loading="lazy"
+              />
+            </button>
+          ))}
+        </div>
+      )}
+      <p class="property-photo-caption">{photographLabel(listing)}</p>
 
-  <figure
-    class:list={['property-art', 'wrap', propertyCanCover ? 'property-art--cover' : 'property-art--intrinsic']}
-    style={`--property-media-width:${image.width}px`}
-  >
-    <div class="property-photo-frame">
-      <img
-        class:list={[propertyCanCover ? 'media--cover' : 'media--intrinsic']}
-        style={`--image-width:${image.width}px`}
-        src={image.public_path}
-        alt={image.alt}
-        width={image.width}
-        height={image.height}
-        fetchpriority="high"
-      />
+      <dialog class="property-lightbox" aria-label="Property photographs" data-gallery-dialog>
+        <div class="lightbox-bar">
+          <p data-gallery-counter></p>
+          <button type="button" data-gallery-close>Close</button>
+        </div>
+        <div class="lightbox-frame"><img data-gallery-image src={image.public_path} alt={image.alt} /></div>
+        {listing.media.length > 1 && (
+          <div class="lightbox-controls">
+            <button type="button" data-gallery-previous>&larr; Previous</button>
+            <button type="button" data-gallery-next>Next &rarr;</button>
+          </div>
+        )}
+      </dialog>
     </div>
-    <figcaption>{photographLabel(listing)}</figcaption>
-  </figure>
+
+    <aside class="property-summary ledger" aria-label="Property summary and demo viewing">
+      <p class="eyebrow">{listing.status_literal}</p>
+      <h1 id="property-title">{listing.title}</h1>
+      <p class="property-location">{listing.locality ?? 'Location not published'}</p>
+      {primaryFigure && (
+        <p class="property-price">
+          <span>{primaryFigure.label_en}</span>
+          {primaryFigure.display_text}
+          {figurePeriodLabel(primaryFigure) && <small>{figurePeriodLabel(primaryFigure)}</small>}
+        </p>
+      )}
+      {hasPublishedFacts && (
+        <dl class="property-facts" aria-label="Published property facts">
+          {listing.bedrooms !== null && <div><dt>Bedrooms</dt><dd>{listing.bedrooms}</dd></div>}
+          {listing.bathrooms !== null && <div><dt>Bathrooms</dt><dd>{listing.bathrooms}</dd></div>}
+        </dl>
+      )}
+      <p class="demo-label">{listingLabel(listing)}</p>
+      <nav class="property-jump" aria-label="Property demo sections">
+        <a href="#illustrative-tools">Illustrative tools</a>
+        {showTour && <a href="#external-example">3D example</a>}
+        <a href="#booking">Booking demo</a>
+      </nav>
+      <a class="button" href="#booking">Request a viewing (demo)</a>
+      <p class="small">Nothing is sent or saved. No viewing is booked.</p>
+    </aside>
+  </section>
 
   <div class="property-body wrap">
     <section class="about-home" aria-labelledby="about-title">
@@ -92,41 +141,22 @@ const provenanceLabel = listing.source
           ))}
         </dl>
       )}
-      <dl class="key-facts">
-        <div><dt>Bedrooms</dt><dd>{listing.bedrooms ?? 'Not published'}</dd></div>
-        <div><dt>Bathrooms</dt><dd>{listing.bathrooms ?? 'Not published'}</dd></div>
-        <div><dt>Floor area</dt><dd>Not published</dd></div>
-      </dl>
       {listing.source && (
         <p class="small">
           <a class="source-link" href={listing.source.url} rel="external">Official listing source</a>
-          {' '}· checked 4 October 2026. This snapshot does not guarantee current availability.
+          {' '}- checked 4 October 2026. This snapshot does not guarantee current availability.
         </p>
       )}
     </section>
-
-    <aside class="ledger enquiry-ledger" aria-label="Demo property journey">
-      <p class="eyebrow">One guided demo</p>
-      <h2>Look closer,<br />then try the journey.</h2>
-      <p>Examples below are separated from the published property snapshot.</p>
-      <nav class="property-jump" aria-label="Property demo sections">
-        <a href="#illustrative-tools">Illustrative tools</a>
-        {showTour && <a href="#external-example">3D example</a>}
-        <a href="#booking">Booking demo</a>
-      </nav>
-      <a class="button" href="#booking">Request a viewing (demo)</a>
-      <p class="small">Nothing is sent or saved. No viewing is booked.</p>
-    </aside>
   </div>
 
   <div class="property-experience wrap">
     <section id="illustrative-tools" class="experience-section" aria-labelledby="illustrative-tools-title">
-      <header class="experience-heading">
+      <header class="experience-heading experience-heading--compact">
         <p class="eyebrow">Illustrative property tools</p>
-        <h2 id="illustrative-tools-title">Examples, not listing evidence.</h2>
+        <h2 id="illustrative-tools-title">Explore before you enquire.</h2>
         <p>
-          The schematic boundary and invented areas below are not measurements of this property.
-          The repayment calculator appears only for an open sale with a published, reviewed GBP price.
+          A clearly labelled land concept and, where eligible, a local repayment estimate.
         </p>
       </header>
       <div class="experience-stack">
@@ -171,3 +201,44 @@ const provenanceLabel = listing.source
     )}
   </div>
 </SiteLayout>
+
+<script>
+  interface GalleryItem { public_path: string; alt: string }
+
+  document.querySelectorAll<HTMLElement>('[data-property-gallery]').forEach(root => {
+    const dialog = root.querySelector<HTMLDialogElement>('[data-gallery-dialog]');
+    const image = root.querySelector<HTMLImageElement>('[data-gallery-image]');
+    const counter = root.querySelector<HTMLElement>('[data-gallery-counter]');
+    if (!dialog || !image || !counter) return;
+
+    const items = JSON.parse(root.dataset.galleryItems ?? '[]') as GalleryItem[];
+    let current = 0;
+
+    const render = () => {
+      const item = items[current];
+      if (!item) return;
+      image.src = item.public_path;
+      image.alt = item.alt;
+      counter.textContent = `Photograph ${current + 1} of ${items.length}`;
+    };
+
+    const move = (amount: number) => {
+      current = (current + amount + items.length) % items.length;
+      render();
+    };
+
+    root.querySelectorAll<HTMLButtonElement>('[data-gallery-open]').forEach(button => {
+      button.addEventListener('click', () => {
+        current = Number(button.dataset.galleryIndex ?? 0);
+        render();
+        dialog.showModal();
+      });
+    });
+    root.querySelector<HTMLButtonElement>('[data-gallery-close]')?.addEventListener('click', () => dialog.close());
+    root.querySelector<HTMLButtonElement>('[data-gallery-previous]')?.addEventListener('click', () => move(-1));
+    root.querySelector<HTMLButtonElement>('[data-gallery-next]')?.addEventListener('click', () => move(1));
+    dialog.addEventListener('click', event => {
+      if (event.target === dialog) dialog.close();
+    });
+  });
+</script>

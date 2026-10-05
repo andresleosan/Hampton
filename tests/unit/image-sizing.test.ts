@@ -29,4 +29,13 @@ describe('raster images stay within original dimensions', () => {
       expect(source, file).toMatch(/media--intrinsic|art--intrinsic|feature--intrinsic/);
     }
   });
+
+  it('builds the property gallery only from additional authorised media', () => {
+    const source = readFileSync('src/pages/property/[id].astro', 'utf8');
+
+    expect(source).toContain('class="property-gallery"');
+    expect(source).toContain('class="property-thumbnails"');
+    expect(source).toContain('listing.media.slice(1).map');
+    expect(source).toContain('property-summary');
+  });
 });
