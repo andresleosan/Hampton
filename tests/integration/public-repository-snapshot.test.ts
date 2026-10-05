@@ -13,9 +13,19 @@ describe('public repository snapshot', () => {
   it('contains the approved filtered catalogue, team and demo configuration', () => {
     const data = publicSnapshot();
 
-    expect(data.listings).toHaveLength(42);
+    expect(data.listings).toHaveLength(41);
     expect(data.agents).toHaveLength(2);
     expect(data.tour3d).not.toBeNull();
+  });
+
+  it('does not publish the listing whose only public image was a placeholder', () => {
+    const data = publicSnapshot();
+    const removedId = 'property-c872d6fee7e6045b';
+
+    expect(data.listings.some(listing => listing.public_id === removedId)).toBe(false);
+    expect(data.listings.flatMap(listing => listing.similar_ids)).not.toContain(removedId);
+    expect(data.listings.flatMap(listing => listing.media)
+      .some(media => media.public_path === '/illustrations/photograph-unavailable.svg')).toBe(false);
   });
 
   it('references exactly the 45 approved versioned photographs and no private path', () => {

@@ -998,68 +998,13 @@
         "url": "https://www.hamptonestatesjersey.com/residential-properties",
         "retrieved_on": "2026-10-04"
       },
-      "similar_ids": [
-        "property-c872d6fee7e6045b"
-      ],
+      "similar_ids": [],
       "calculator": {
         "price_gbp": 460000
       },
       "demo": {
         "aerial": null,
         "tour3d": true
-      }
-    },
-    {
-      "public_id": "property-c872d6fee7e6045b",
-      "section": "residential",
-      "geography": "jersey",
-      "tab": "for-sale",
-      "source_order": 3,
-      "operation": "sale",
-      "status_literal": "FOR SALE",
-      "status_normalised": "open",
-      "title": "Modern First Floor Apartment",
-      "locality": "St Aubin",
-      "description_public": null,
-      "description_withheld": false,
-      "bedrooms": 1,
-      "bathrooms": 1,
-      "figures": [
-        {
-          "type": "sale_price",
-          "amount": 450000,
-          "currency": "GBP",
-          "period": null,
-          "label_en": "Sale price",
-          "display_text": "£450,000",
-          "under_review": false
-        }
-      ],
-      "media": [
-        {
-          "public_path": "/illustrations/photograph-unavailable.svg",
-          "width": 1200,
-          "height": 900,
-          "alt": "Photograph unavailable for Modern First Floor Apartment"
-        }
-      ],
-      "legal_notice": {
-        "disclaimer": "These particulars do not form part of a contract and whilst every care is taken to ensure their accuracy, Hampton Estates cannot be held responsible for any error or omission that may arise. All viewings are strictly through the offices of Hampton Estates.",
-        "aml": ""
-      },
-      "source": {
-        "url": "https://www.hamptonestatesjersey.com/residential-properties",
-        "retrieved_on": "2026-10-04"
-      },
-      "similar_ids": [
-        "property-31d78e96d885d1ec"
-      ],
-      "calculator": {
-        "price_gbp": 450000
-      },
-      "demo": {
-        "aerial": null,
-        "tour3d": false
       }
     },
     {
