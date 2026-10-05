@@ -28,6 +28,16 @@ describe('public repository snapshot', () => {
       .some(media => media.public_path === '/illustrations/photograph-unavailable.svg')).toBe(false);
   });
 
+  it('redirects the removed public route away from any cached property page', () => {
+    const redirectsPath = 'public/_redirects';
+
+    expect(existsSync(redirectsPath), `${redirectsPath} exists`).toBe(true);
+    if (!existsSync(redirectsPath)) return;
+    expect(readFileSync(redirectsPath, 'utf8')).toContain(
+      '/property/property-c872d6fee7e6045b/ /residential/ 301',
+    );
+  });
+
   it('references exactly the 45 approved versioned photographs and no private path', () => {
     const data = publicSnapshot();
     const paths = [
