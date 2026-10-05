@@ -21,11 +21,19 @@ describe('versioned public listing preview', () => {
     expect(loaded.listings[0].title).toBe('Victoria Street');
     expect(preview.listingLabel(loaded.listings[0])).toBe('Real Hampton listing snapshot · checked 4 October 2026 · demo preview');
   });
-  it('uses labelled synthetic fallback only when the public snapshot is absent', async () => {
+  it('uses labelled synthetic fallback only when a test or development caller supplies it explicitly', async () => {
     expect(preview.loadPreviewData).toBeTypeOf('function');
-    const data = await preview.loadPreviewData(async () => { throw Object.assign(new Error('missing'), { code: 'ENOENT' }); });
+    const data = await preview.loadPreviewData(
+      async () => { throw Object.assign(new Error('missing'), { code: 'ENOENT' }); },
+      demoData,
+    );
     expect(data).toEqual(demoData);
     expect(preview.listingLabel(data.listings[0])).toBe('Demo property — fictional');
+  });
+  it('fails a normal build when the committed public snapshot is absent', async () => {
+    await expect(preview.loadPreviewData(async () => {
+      throw Object.assign(new Error('missing public snapshot'), { code: 'ENOENT' });
+    })).rejects.toThrow('missing public snapshot');
   });
   it('fails loudly for unreadable or malformed public data instead of hiding it', async () => {
     expect(preview.loadPreviewData).toBeTypeOf('function');

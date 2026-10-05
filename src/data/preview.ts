@@ -1,15 +1,17 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import type { PublicData, PublicListing } from '../domain/public-contract.ts';
-import { demoData } from './demo.ts';
 
 export const DEFAULT_PUBLIC_SNAPSHOT_PATH = 'src/data/public-snapshot.json';
 
-export async function loadPreviewData(read: () => Promise<string> = () => readFile(resolve(DEFAULT_PUBLIC_SNAPSHOT_PATH), 'utf8')): Promise<PublicData> {
+export async function loadPreviewData(
+  read: () => Promise<string> = () => readFile(resolve(DEFAULT_PUBLIC_SNAPSHOT_PATH), 'utf8'),
+  fallback?: PublicData,
+): Promise<PublicData> {
   let json: string;
   try { json = await read(); }
   catch (error) {
-    if ((error as NodeJS.ErrnoException).code === 'ENOENT') return demoData;
+    if ((error as NodeJS.ErrnoException).code === 'ENOENT' && fallback) return fallback;
     throw error;
   }
   return JSON.parse(json) as PublicData;
