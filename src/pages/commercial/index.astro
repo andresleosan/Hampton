@@ -1,0 +1,30 @@
+---
+import CommercialPreview from '../../components/CommercialPreview.astro';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { loadPreviewData } from '../../data/preview.ts';
+import { commercialListings } from '../../domain/catalogue.ts';
+
+const data = await loadPreviewData();
+const listings = commercialListings(data.listings);
+const contactListing = listings.find(listing => listing.status_normalised === 'open') ?? listings[0];
+const contactHref = contactListing ? `/property/${contactListing.public_id}/#booking` : '/#team';
+---
+
+<SiteLayout
+  title="Commercial property snapshots"
+  description="Verified public commercial listing snapshots in the Hampton Estates local demo."
+  current="commercial"
+  contactHref={contactHref}
+>
+  <section class="commercial-page wrap">
+    <header class="commercial-intro">
+      <p class="eyebrow">Commercial collection · verified snapshots</p>
+      <h1>Published figures,<br /><em>carefully separated.</em></h1>
+      <p class="intro-copy">
+        Public details are reproduced as dated snapshots. Confidential descriptions stay withheld,
+        figures under review remain labelled, and current availability is not verified.
+      </p>
+    </header>
+    <CommercialPreview listings={listings} />
+  </section>
+</SiteLayout>

@@ -1,0 +1,636 @@
+---
+import {
+  formatMoneyInput,
+  roundPenceHalfAwayFromZero,
+} from '../domain/mortgage.ts';
+import type { PublicListing } from '../domain/public-contract.ts';
+
+interface Props {
+  calculator: PublicListing['calculator'];
+}
+
+const { calculator } = Astro.props;
+const initialPrice = calculator
+  ? formatMoneyInput(roundPenceHalfAwayFromZero(calculator.price_gbp * 100))
+  : '';
+---
+
+{calculator && (
+  <section class="mortgage-calculator" aria-labelledby="mortgage-title" data-mortgage-calculator>
+    <header class="mortgage-heading">
+      <p class="eyebrow">Mortgage calculator</p>
+      <h2 id="mortgage-title">Estimate a monthly repayment.</h2>
+      <p>
+        Adjust the property price, deposit, annual interest rate and term. The estimate covers
+        capital and interest only.
+      </p>
+    </header>
+
+    <div class="calculator-layout">
+      <form id="mortgage-form" class="mortgage-form" novalidate autocomplete="off">
+        <div class="calculator-fields">
+          <div class="field">
+            <label for="mortgage-price">Price</label>
+            <span class="input-shell" data-prefix="£">
+              <input
+                id="mortgage-price"
+                name="price"
+                type="text"
+                inputmode="decimal"
+                value={initialPrice}
+                aria-describedby="mortgage-price-hint mortgage-price-error"
+              />
+            </span>
+            <p id="mortgage-price-hint" class="field-hint">GBP, up to £100,000,000.</p>
+            <p id="mortgage-price-error" class="field-error" aria-live="polite"></p>
+          </div>
+
+          <div class="field field--deposit">
+            <label id="mortgage-deposit-label" for="mortgage-deposit">Deposit</label>
+            <div class="deposit-control">
+              <span class="input-shell input-shell--suffix">
+                <span class="deposit-prefix" data-deposit-prefix hidden>£</span>
+                <input
+                  id="mortgage-deposit"
+                  name="deposit"
+                  type="text"
+                  inputmode="decimal"
+                  value="10"
+                  aria-labelledby="mortgage-deposit-label mortgage-deposit-unit"
+                  aria-describedby="mortgage-deposit-hint mortgage-deposit-error"
+                />
+                <span id="mortgage-deposit-unit" class="deposit-unit" data-deposit-unit>%</span>
+              </span>
+
+              <fieldset class="deposit-mode">
+                <legend>Deposit format</legend>
+                <label>
+                  <input type="radio" name="deposit-mode" value="percent" checked />
+                  <span>Percentage</span>
+                </label>
+                <label>
+                  <input type="radio" name="deposit-mode" value="gbp" />
+                  <span>Pounds</span>
+                </label>
+              </fieldset>
+            </div>
+            <p id="mortgage-deposit-hint" class="field-hint">Initial value: 10% deposit - illustrative and editable.</p>
+            <p id="mortgage-deposit-error" class="field-error" aria-live="polite"></p>
+          </div>
+
+          <div class="field">
+            <label for="mortgage-rate">Annual interest rate</label>
+            <span class="input-shell input-shell--suffix">
+              <input
+                id="mortgage-rate"
+                name="rate"
+                type="text"
+                inputmode="decimal"
+                value="5.00"
+                aria-describedby="mortgage-rate-hint mortgage-rate-error"
+              />
+              <span aria-hidden="true">%</span>
+            </span>
+            <p id="mortgage-rate-hint" class="field-hint">
+              Illustrative demo rate — editable; not current, offered or recommended. Enter 0 to
+              20%; 20% is a demo validity limit, not a recommended rate.
+            </p>
+            <p id="mortgage-rate-error" class="field-error" aria-live="polite"></p>
+          </div>
+
+          <div class="field">
+            <label for="mortgage-years">Mortgage term</label>
+            <span class="input-shell input-shell--suffix">
+              <input
+                id="mortgage-years"
+                name="years"
+                type="text"
+                inputmode="numeric"
+                value="25"
+                aria-describedby="mortgage-years-hint mortgage-years-error"
+              />
+              <span aria-hidden="true">years</span>
+            </span>
+            <p id="mortgage-years-hint" class="field-hint">Initial value: 25-year term - illustrative and editable.</p>
+            <p id="mortgage-years-error" class="field-error" aria-live="polite"></p>
+          </div>
+        </div>
+
+        <p id="mortgage-errors" class="error-summary" role="status" aria-live="polite"></p>
+      </form>
+
+      <div id="mortgage-result" class="mortgage-result" aria-live="polite" aria-atomic="true">
+        <p class="result-prompt" data-result-prompt>
+          Preparing an indicative repayment.
+        </p>
+
+        <div data-payment-result hidden>
+          <p class="result-label">Estimated monthly repayment</p>
+          <p class="monthly-payment"><output data-monthly></output><span>per month</span></p>
+          <p class="result-label result-label--detail">Capital and interest</p>
+          <dl class="mortgage-totals">
+            <div><dt>Mortgage amount</dt><dd><output data-loan></output></dd></div>
+            <div><dt>Total paid</dt><dd><output data-total></output></dd></div>
+            <div><dt>Total interest</dt><dd><output data-interest></output></dd></div>
+          </dl>
+          <p class="rounding-note">Figures rounded to the nearest penny.</p>
+        </div>
+
+        <p class="no-mortgage" data-no-mortgage hidden>
+          No mortgage needed: the deposit covers the full price.
+        </p>
+
+        <p class="result-disclosure">Indicative only. Not a mortgage offer or financial advice.</p>
+
+        <details class="assumptions">
+          <summary>Assumptions behind this estimate</summary>
+          <ul>
+            <li>Repayment mortgage with equal monthly capital and interest payments.</li>
+            <li>No fees, taxes, insurance or other property costs are included.</li>
+            <li>The rate stays unchanged for the full illustrative term.</li>
+          </ul>
+        </details>
+        <p class="privacy-note">Calculated in this browser. Nothing is sent or saved.</p>
+      </div>
+    </div>
+  </section>
+)}
+
+<script>
+  import {
+    computeMortgage,
+    depositFromPercent,
+    formatMoneyInput,
+    formatPence,
+    formatPercentInput,
+    parseMoneyInput,
+    parsePercentInput,
+    penceToBasisPoints,
+    validateCalculator,
+    type DepositMode,
+    type MortgageField,
+  } from '../domain/mortgage.ts';
+
+  document.querySelectorAll<HTMLElement>('[data-mortgage-calculator]').forEach(root => {
+    const form = root.querySelector<HTMLFormElement>('#mortgage-form');
+    const price = root.querySelector<HTMLInputElement>('#mortgage-price');
+    const deposit = root.querySelector<HTMLInputElement>('#mortgage-deposit');
+    const rate = root.querySelector<HTMLInputElement>('#mortgage-rate');
+    const years = root.querySelector<HTMLInputElement>('#mortgage-years');
+    const modeInputs = Array.from(root.querySelectorAll<HTMLInputElement>('input[name="deposit-mode"]'));
+    const summary = root.querySelector<HTMLElement>('#mortgage-errors');
+    const prompt = root.querySelector<HTMLElement>('[data-result-prompt]');
+    const payment = root.querySelector<HTMLElement>('[data-payment-result]');
+    const noMortgage = root.querySelector<HTMLElement>('[data-no-mortgage]');
+    const depositPrefix = root.querySelector<HTMLElement>('[data-deposit-prefix]');
+    const depositUnit = root.querySelector<HTMLElement>('[data-deposit-unit]');
+
+    if (
+      !form || !price || !deposit || !rate || !years || !summary || !prompt || !payment
+      || !noMortgage || !depositPrefix || !depositUnit
+    ) return;
+
+    const fields: Record<MortgageField, HTMLInputElement> = { price, deposit, rate, years };
+    let previousMode: DepositMode = 'percent';
+
+    const selectedMode = (): DepositMode =>
+      modeInputs.find(input => input.checked)?.value === 'gbp' ? 'gbp' : 'percent';
+
+    const hideResults = () => {
+      prompt.hidden = false;
+      payment.hidden = true;
+      noMortgage.hidden = true;
+    };
+
+    const clearErrors = () => {
+      summary.textContent = '';
+      (Object.keys(fields) as MortgageField[]).forEach(field => {
+        fields[field].removeAttribute('aria-invalid');
+        const message = root.querySelector<HTMLElement>(`#mortgage-${field}-error`);
+        if (message) message.textContent = '';
+      });
+    };
+
+    const showErrors = (errors: Partial<Record<MortgageField, string>>) => {
+      const invalid = (Object.keys(fields) as MortgageField[]).filter(field => errors[field]);
+      invalid.forEach(field => {
+        fields[field].setAttribute('aria-invalid', 'true');
+        const message = root.querySelector<HTMLElement>(`#mortgage-${field}-error`);
+        if (message) message.textContent = errors[field] ?? '';
+      });
+      summary.textContent = invalid.length === 1
+        ? 'Check the highlighted field.'
+        : `Check the ${invalid.length} highlighted fields.`;
+    };
+
+    const update = () => {
+      clearErrors();
+      const validation = validateCalculator({
+        price: price.value,
+        deposit: deposit.value,
+        depositMode: selectedMode(),
+        rate: rate.value,
+        years: years.value,
+      });
+      if (!validation.ok) {
+        showErrors(validation.errors);
+        hideResults();
+        return;
+      }
+
+      const result = computeMortgage(validation.input);
+      prompt.hidden = true;
+      if (result.kind === 'no-mortgage-needed') {
+        payment.hidden = true;
+        noMortgage.hidden = false;
+        return;
+      }
+
+      noMortgage.hidden = true;
+      payment.hidden = false;
+      root.querySelector<HTMLOutputElement>('[data-monthly]')!.value = formatPence(result.monthlyPence);
+      root.querySelector<HTMLOutputElement>('[data-loan]')!.value = formatPence(result.loanPence);
+      root.querySelector<HTMLOutputElement>('[data-total]')!.value = formatPence(result.totalPaidPence);
+      root.querySelector<HTMLOutputElement>('[data-interest]')!.value = formatPence(result.totalInterestPence);
+    };
+
+    const convertDeposit = () => {
+      const nextMode = selectedMode();
+      if (nextMode === previousMode) return;
+      const parsedPrice = parseMoneyInput(price.value);
+      if (parsedPrice.ok && parsedPrice.pence > 0) {
+        if (previousMode === 'percent') {
+          const parsedDeposit = parsePercentInput(deposit.value);
+          if (parsedDeposit.ok && parsedDeposit.basisPoints <= 10_000) {
+            deposit.value = formatMoneyInput(depositFromPercent(parsedPrice.pence, parsedDeposit.basisPoints));
+          }
+        } else {
+          const parsedDeposit = parseMoneyInput(deposit.value);
+          if (parsedDeposit.ok && parsedDeposit.pence <= parsedPrice.pence) {
+            deposit.value = formatPercentInput(penceToBasisPoints(parsedDeposit.pence, parsedPrice.pence));
+          }
+        }
+      }
+      previousMode = nextMode;
+      const pounds = nextMode === 'gbp';
+      depositPrefix.hidden = !pounds;
+      depositUnit.textContent = pounds ? 'GBP' : '%';
+    };
+
+    modeInputs.forEach(input => input.addEventListener('change', convertDeposit));
+    form.addEventListener('input', update);
+    form.addEventListener('change', update);
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      update();
+    });
+
+    update();
+  });
+</script>
+
+<style>
+  .mortgage-calculator {
+    display: grid;
+    gap: clamp(1.35rem, 3vw, 2rem);
+    min-width: 0;
+    padding: clamp(1.25rem, 4vw, 2.25rem);
+    border: 1px solid var(--line, #c8c9c5);
+    background: var(--white, #fff);
+    color: var(--ink, #323644);
+  }
+
+  .mortgage-heading {
+    max-width: 68ch;
+  }
+
+  .eyebrow,
+  .result-label {
+    margin: 0;
+    color: var(--brand-deep, #1f4e78);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    margin: 0.55rem 0 0;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(1.75rem, 4vw, 2.35rem);
+    font-weight: 400;
+    line-height: 1.12;
+    text-wrap: balance;
+  }
+
+  .mortgage-heading > p:last-child {
+    margin: 0.7rem 0 0;
+    color: var(--ink-2, #5b6170);
+  }
+
+  .calculator-layout,
+  .mortgage-form {
+    display: grid;
+    gap: 1.25rem;
+    min-width: 0;
+  }
+
+  .calculator-fields {
+    display: grid;
+    gap: 1rem;
+    min-width: 0;
+  }
+
+  .mortgage-form .field {
+    margin: 0;
+    min-width: 0;
+  }
+
+  .field > label {
+    display: block;
+    margin-bottom: 0.4rem;
+    color: var(--ink, #323644);
+    font-size: 0.84rem;
+    font-weight: 700;
+  }
+
+  .input-shell {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    min-height: 2.75rem;
+    border: 1px solid var(--ink-2, #5b6170);
+    background: var(--white, #fff);
+  }
+
+  .input-shell::before,
+  .input-shell > span {
+    flex: 0 0 auto;
+    padding-inline: 0.75rem;
+    color: var(--ink-2, #5b6170);
+    font-weight: 700;
+  }
+
+  .input-shell::before {
+    content: attr(data-prefix);
+  }
+
+  .input-shell--suffix::before {
+    content: none;
+  }
+
+  .input-shell input {
+    width: 100%;
+    min-width: 0;
+    min-height: 2.75rem;
+    padding: 0.6rem 0.7rem;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--ink, #323644);
+    font: inherit;
+  }
+
+  .input-shell:focus-within {
+    outline: 2px solid var(--brand-deep, #1f4e78);
+    outline-offset: 2px;
+  }
+
+  input:focus {
+    outline: none;
+  }
+
+  .input-shell:has(input[aria-invalid='true']) {
+    border-color: #8a2b2b;
+    border-width: 2px;
+  }
+
+  .field-hint,
+  .field-error {
+    margin: 0.35rem 0 0;
+    font-size: 0.75rem;
+    line-height: 1.4;
+  }
+
+  .field-hint {
+    color: var(--ink-2, #5b6170);
+  }
+
+  .field-error,
+  .error-summary {
+    color: #8a2b2b;
+    font-weight: 700;
+  }
+
+  .field-error:empty,
+  .error-summary:empty {
+    display: none;
+  }
+
+  .deposit-control {
+    display: grid;
+    gap: 0.5rem;
+    min-width: 0;
+  }
+
+  .deposit-mode {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .deposit-mode legend {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .deposit-mode label {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.75rem;
+    padding: 0.45rem 0.7rem;
+    border: 1px solid var(--ink-2, #5b6170);
+    background: var(--white, #fff);
+    color: var(--ink, #323644);
+    font-size: 0.78rem;
+    font-weight: 700;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .deposit-mode label + label {
+    margin-left: -1px;
+  }
+
+  .deposit-mode label:has(input:checked) {
+    z-index: 1;
+    border-color: var(--brand-deep, #1f4e78);
+    background: var(--brand-deep, #1f4e78);
+    color: var(--white, #fff);
+  }
+
+  .deposit-mode input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }
+
+  .deposit-mode label:has(input:focus-visible) {
+    outline: 2px solid var(--brand-deep, #1f4e78);
+    outline-offset: 2px;
+  }
+
+  .error-summary {
+    margin: 0;
+  }
+
+  .mortgage-result {
+    align-self: start;
+    min-width: 0;
+    padding: clamp(1.2rem, 4vw, 2rem);
+    border-top: 4px solid var(--brand-deep, #1f4e78);
+    background: var(--paper, #f6f4ef);
+  }
+
+  .result-prompt,
+  .no-mortgage,
+  .monthly-payment {
+    margin: 0;
+  }
+
+  .monthly-payment {
+    display: flex;
+    gap: 0.5rem;
+    align-items: baseline;
+    flex-wrap: wrap;
+    margin-top: 0.35rem;
+    color: var(--brand-deep, #1f4e78);
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(2.5rem, 9vw, 4.2rem);
+    letter-spacing: -0.035em;
+    line-height: 0.95;
+    overflow-wrap: anywhere;
+  }
+
+  .monthly-payment span {
+    color: var(--ink-2, #5b6170);
+    font-family: inherit;
+    font-size: 0.95rem;
+    letter-spacing: 0;
+  }
+
+  .result-label--detail {
+    margin-top: 1.4rem;
+  }
+
+  .mortgage-totals {
+    display: grid;
+    gap: 0;
+    margin: 0.55rem 0 0;
+    border-block: 1px solid var(--line, #c8c9c5);
+  }
+
+  .mortgage-totals div {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding-block: 0.75rem;
+  }
+
+  .mortgage-totals div + div {
+    border-top: 1px solid var(--line, #c8c9c5);
+  }
+
+  .mortgage-totals dd {
+    margin: 0;
+    font-weight: 700;
+    text-align: right;
+    overflow-wrap: anywhere;
+  }
+
+  .rounding-note,
+  .privacy-note {
+    margin: 0.7rem 0 0;
+    color: var(--ink-2, #5b6170);
+    font-size: 0.75rem;
+  }
+
+  .no-mortgage {
+    color: var(--brand-deep, #1f4e78);
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(1.35rem, 4vw, 1.8rem);
+  }
+
+  .result-disclosure {
+    margin: 1rem 0 0;
+    padding: 0.75rem 0 0;
+    border-top: 1px solid var(--line, #c8c9c5);
+    font-size: 0.82rem;
+    font-weight: 700;
+    line-height: 1.45;
+  }
+
+  .assumptions {
+    margin-top: 0.85rem;
+    border-block: 1px solid var(--line, #c8c9c5);
+  }
+
+  .assumptions summary {
+    min-height: 2.75rem;
+    padding: 0.75rem 1.5rem 0.75rem 0;
+    color: var(--ink, #323644);
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .assumptions ul {
+    margin: 0;
+    padding-bottom: 1rem;
+    padding-left: 1.2rem;
+    color: var(--ink-2, #5b6170);
+    font-size: 0.78rem;
+    line-height: 1.5;
+  }
+
+  .assumptions li + li {
+    margin-top: 0.35rem;
+  }
+
+  .assumptions summary:focus-visible {
+    outline: 2px solid var(--brand-deep, #1f4e78);
+    outline-offset: 2px;
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+
+  @media (min-width: 520px) {
+    .deposit-control {
+      grid-template-columns: minmax(7rem, 1fr) auto;
+    }
+
+    .calculator-fields {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 920px) {
+    .calculator-layout {
+      grid-template-columns: minmax(0, 1.15fr) minmax(19rem, 0.85fr);
+      align-items: start;
+    }
+  }
+</style>

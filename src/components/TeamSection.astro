@@ -1,0 +1,310 @@
+---
+import type { PublicAgent } from '../domain/public-contract.ts';
+
+interface Props { agents: PublicAgent[] }
+const { agents } = Astro.props;
+
+const monogram = (name: string) => name
+  .trim()
+  .split(/\s+/)
+  .slice(0, 2)
+  .map((part) => part.charAt(0))
+  .join('')
+  .toUpperCase();
+
+---
+
+<section class="team-section" id="team" aria-labelledby="team-title">
+  <header class="team-heading">
+    <div>
+      <p class="eyebrow">Meet the team</p>
+      <h2 id="team-title">People first, details clearly published</h2>
+    </div>
+    <div class="snapshot-note" aria-label="Demo team snapshot">
+      <span class="demo-badge">Demo</span>
+      <p><strong>Team snapshot</strong> verified for this local demo</p>
+    </div>
+  </header>
+
+  <p class="team-intro">
+    These are Hampton's published team details. No portrait has been substituted or generated;
+    contact details are shown as text and will not start a call or send an email.
+  </p>
+
+  <div class="team-grid">
+    {agents.map((agent) => (
+      <article class="agent-card" aria-labelledby={`agent-${agent.public_id}`}>
+        {agent.portrait ? (
+          <figure class="agent-portrait">
+            <img
+              style={`--portrait-width:${agent.portrait.width}px`}
+              src={agent.portrait.public_path}
+              alt={agent.portrait.alt}
+              width={agent.portrait.width}
+              height={agent.portrait.height}
+              loading="lazy"
+            />
+          </figure>
+        ) : (
+          <div class="agent-identity" aria-hidden="true" data-agent-monogram>
+            <span>{monogram(agent.name)}</span>
+            <small>Portrait unavailable</small>
+          </div>
+        )}
+
+        <div class="agent-details">
+          <p class="profile-label">Published team profile</p>
+          <h3 id={`agent-${agent.public_id}`}>{agent.name}</h3>
+          <p class="agent-role">{agent.role}</p>
+
+          <dl class="contact-list">
+            <div>
+              <dt>{agent.phones.length > 1 ? 'Telephone numbers' : 'Telephone'}</dt>
+              <dd>
+                {agent.phones.map((phone) => <span>{phone}</span>)}
+              </dd>
+            </div>
+            <div>
+              <dt>Shared office email</dt>
+              <dd>{agent.email ?? 'Not published'}</dd>
+            </div>
+          </dl>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>
+
+<style>
+  .team-section {
+    padding-block: clamp(2.5rem, 6vw, 4rem);
+    color: var(--ink, #323644);
+  }
+
+  .team-heading {
+    display: grid;
+    gap: 1.5rem;
+    padding-bottom: clamp(1.25rem, 3vw, 2rem);
+    border-bottom: 1px solid var(--line, #c8c9c5);
+  }
+
+  .eyebrow,
+  .profile-label {
+    margin: 0;
+    color: var(--brand-deep, #1f4e78);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+
+  h2,
+  h3 {
+    color: var(--ink, #323644);
+    font-family: Georgia, 'Times New Roman', serif;
+    font-weight: 400;
+    line-height: 1.08;
+    text-wrap: balance;
+  }
+
+  h2 {
+    max-width: 18ch;
+    margin: 0.8rem 0 0;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    letter-spacing: -0.035em;
+  }
+
+  h3 {
+    margin: 0.75rem 0 0;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    letter-spacing: -0.025em;
+  }
+
+  .snapshot-note {
+    align-self: end;
+    max-width: 24rem;
+    padding: 1rem 1.1rem;
+    border-left: 3px solid var(--brand-deep, #1f4e78);
+    background: #fff;
+  }
+
+  .snapshot-note p {
+    margin: 0.55rem 0 0;
+    color: var(--ink-2, #5b6170);
+    font-size: 0.82rem;
+  }
+
+  .demo-badge {
+    display: inline-flex;
+    align-items: center;
+    min-height: 1.75rem;
+    padding: 0.25rem 0.6rem;
+    border: 1px solid var(--brand-deep, #1f4e78);
+    color: var(--brand-deep, #1f4e78);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .team-intro {
+    max-width: 68ch;
+    margin: clamp(1.25rem, 3vw, 2rem) 0 0;
+    color: var(--ink-2, #5b6170);
+    line-height: 1.65;
+  }
+
+  .team-grid {
+    display: grid;
+    gap: 1rem;
+    margin-top: clamp(1.5rem, 3.5vw, 2.5rem);
+  }
+
+  .agent-card {
+    display: grid;
+    min-width: 0;
+    border: 1px solid var(--line, #c8c9c5);
+    background: #fff;
+  }
+
+  .agent-identity {
+    position: relative;
+    display: grid;
+    align-content: center;
+    justify-items: center;
+    min-height: 12rem;
+    padding: 2rem;
+    overflow: hidden;
+    border-bottom: 1px solid var(--line, #c8c9c5);
+    background: #f0f2f3;
+    color: var(--brand-deep, #1f4e78);
+  }
+
+  .agent-portrait {
+    display: grid;
+    min-height: 16rem;
+    margin: 0;
+    padding: 1rem;
+    place-items: center;
+    overflow: hidden;
+    border-bottom: 1px solid var(--line, #c8c9c5);
+    background: #e9edf0;
+  }
+
+  .agent-portrait img {
+    width: min(100%, var(--portrait-width));
+    height: auto;
+    max-height: 100%;
+    filter: grayscale(1);
+    object-fit: contain;
+  }
+
+  .agent-identity::before {
+    position: absolute;
+    inset: 0 auto 0 50%;
+    width: 1px;
+    background: var(--line, #c8c9c5);
+    content: '';
+  }
+
+  .agent-identity span {
+    position: relative;
+    display: grid;
+    width: 5.5rem;
+    aspect-ratio: 1;
+    place-items: center;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    background: #fff;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 2rem;
+    letter-spacing: 0.04em;
+  }
+
+  .agent-identity small {
+    position: relative;
+    margin-top: 0.85rem;
+    padding: 0.2rem 0.45rem;
+    background: #fff;
+    color: var(--ink-2, #5b6170);
+    font-size: 0.7rem;
+    font-weight: 700;
+  }
+
+  .agent-details {
+    min-width: 0;
+    padding: clamp(1.25rem, 3vw, 1.75rem);
+  }
+
+  .agent-role {
+    margin: 0.55rem 0 0;
+    color: var(--ink-2, #5b6170);
+    font-size: 0.9rem;
+  }
+
+  .contact-list {
+    display: grid;
+    gap: 0.75rem;
+    margin: 1.25rem 0 0;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line, #c8c9c5);
+  }
+
+  .contact-list div {
+    min-width: 0;
+  }
+
+  dt {
+    color: var(--ink-2, #5b6170);
+    font-size: 0.72rem;
+  }
+
+  dd {
+    display: flex;
+    gap: 0.25rem 0.8rem;
+    flex-wrap: wrap;
+    margin: 0.25rem 0 0;
+    color: var(--ink, #323644);
+    font-size: 0.9rem;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+  }
+
+  @media (min-width: 680px) {
+    .team-heading {
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: end;
+    }
+
+    .team-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 980px) {
+    .agent-card {
+      grid-template-columns: minmax(10rem, 0.78fr) minmax(0, 1.22fr);
+    }
+
+    .agent-identity {
+      min-height: 100%;
+      border-right: 1px solid var(--line, #c8c9c5);
+      border-bottom: 0;
+    }
+
+    .agent-portrait {
+      min-height: 100%;
+      border-right: 1px solid var(--line, #c8c9c5);
+      border-bottom: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      scroll-behavior: auto !important;
+      transition: none !important;
+    }
+  }
+</style>

@@ -1,0 +1,58 @@
+---
+import type { PublicListing } from '../domain/public-contract.ts';
+import { listingLabel } from '../data/preview.ts';
+interface Props { listing: PublicListing; showTour: boolean }
+const { listing, showTour } = Astro.props;
+const image = listing.media[0];
+const primaryFigure = listing.figures[0];
+const mediaCanCover = image.width >= 480 && image.height >= 360;
+---
+<article class="property-card">
+  <a href={`/property/${listing.public_id}/`}>
+    <div class="card-image">
+      <img
+        class:list={[mediaCanCover ? 'media--cover' : 'media--intrinsic']}
+        style={`--image-width:${image.width}px`}
+        src={image.public_path}
+        alt={image.alt}
+        width={image.width}
+        height={image.height}
+        loading="lazy"
+      />
+      <span class="card-status">{listing.status_literal}</span>
+    </div>
+    <div class="card-content">
+      <h2>{listing.title}</h2>
+      <p class="muted">{listing.locality}</p>
+      <p>{listing.bedrooms ?? 'Not published'} bed <span aria-hidden="true">·</span> {listing.bathrooms ?? 'Not published'} bath</p>
+      {showTour && <p class="tour-marker">Separate 3D example available</p>}
+      <div class="card-bottom"><span class="price">{primaryFigure?.display_text ?? 'Price not published'}</span><span class="card-link">View property <span aria-hidden="true">↗</span></span></div>
+      <p class="demo-label">{listingLabel(listing)}</p>
+    </div>
+  </a>
+</article>
+
+<style>
+  .tour-marker {
+    width: fit-content;
+    margin-top: 0.9rem;
+    padding: 0.35rem 0.55rem;
+    border: 1px solid var(--brand-deep);
+    color: var(--brand-deep);
+    font-size: 0.72rem;
+    font-weight: 700;
+  }
+
+  .card-status {
+    position: absolute;
+    inset: 0.85rem auto auto 0.85rem;
+    padding: 0.38rem 0.55rem;
+    background: #fff;
+    color: var(--brand-deep);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+</style>

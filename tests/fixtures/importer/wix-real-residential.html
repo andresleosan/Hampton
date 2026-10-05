@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <body>synthetic residential shell</body>
+  <script type="application/json" id="wix-warmup-data">
+    {
+      "platform": {},
+      "pages": {},
+      "appsWarmupData": {
+        "dataBinding": {
+          "schemas": {
+            "ResidentialDataset": {
+              "fields": {
+                "_id": { "type": "text" },
+                "title": { "type": "text" },
+                "price3": { "type": "text" },
+                "status": { "type": "text" },
+                "image": { "type": "image" },
+                "gallery": { "type": "mediaGallery" }
+              }
+            }
+          },
+          "dataStore": {
+            "recordInfosByDatasetId": {
+              "comp-residential": {
+                "itemIds": [
+                  "11111111-1111-4111-8111-111111111111",
+                  "22222222-2222-4222-8222-222222222222"
+                ],
+                "datasetSize": { "total": 2, "loaded": 2 },
+                "collectionId": "ResidentialDataset"
+              }
+            },
+            "recordsByCollectionId": {
+              "ResidentialDataset": {
+                "11111111-1111-4111-8111-111111111111": {
+                  "_id": "11111111-1111-4111-8111-111111111111",
+                  "title": "Example Cottage",
+                  "price3": "£650,000",
+                  "status": "FOR SALE",
+                  "type": "To Buy",
+                  "propertyType": "House",
+                  "bedrooms": "3",
+                  "bathrooms": "1",
+                  "location": "St Example",
+                  "roadName": "Example Road",
+                  "value": 650000,
+                  "description": "<p>Quiet family home</p>",
+                  "mainDescription": "Three bedrooms",
+                  "image": "wix:image://v1/demo_main~mv2.jpg/Example.jpg#originWidth=1200&originHeight=800",
+                  "gallery": [
+                    {
+                      "fileName": "Garden.jpg",
+                      "slug": "demo_garden~mv2.jpg",
+                      "alt": "Example garden",
+                      "src": "wix:image://v1/demo_garden~mv2.jpg/Garden.jpg#originWidth=1000&originHeight=700",
+                      "type": "image",
+                      "settings": { "height": 700, "width": 1000 }
+                    }
+                  ]
+                },
+                "22222222-2222-4222-8222-222222222222": {
+                  "_id": "22222222-2222-4222-8222-222222222222",
+                  "title": "Example Flat",
+                  "price3": "£1,900 per month",
+                  "status": "TO LET",
+                  "type": "To Rent",
+                  "propertyType": "Apartment",
+                  "bedrooms": "2",
+                  "bathrooms": "2",
+                  "location": "St Sample",
+                  "description": "<p>Central apartment</p>",
+                  "image": "wix:image://v1/demo_flat~mv2.png/Flat.png#originWidth=900&originHeight=600",
+                  "gallery": []
+                }
+              }
+            },
+            "uniqueFieldValuesByCollection": {}
+          }
+        }
+      },
+      "builderComponentsWarmupData": {},
+      "ooi": {}
+    }
+  </script>
+</html>

@@ -1,0 +1,173 @@
+---
+import AerialDemo from '../../components/AerialDemo.astro';
+import BookingFlow from '../../components/BookingFlow.astro';
+import MortgageCalculator from '../../components/MortgageCalculator.astro';
+import SimilarProperties from '../../components/SimilarProperties.astro';
+import TeamSection from '../../components/TeamSection.astro';
+import Tour3D from '../../components/Tour3D.astro';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import { loadPreviewData, listingLabel, photographLabel } from '../../data/preview.ts';
+import { figurePeriodLabel } from '../../domain/catalogue.ts';
+import type { PublicAgent, PublicListing, PublicTour3D } from '../../domain/public-contract.ts';
+
+export async function getStaticPaths() {
+  const data = await loadPreviewData();
+  return data.listings.map(listing => ({
+    params: { id: listing.public_id },
+    props: { listing, listings: data.listings, agents: data.agents, tour3d: data.tour3d },
+  }));
+}
+
+interface Props {
+  listing: PublicListing;
+  listings: PublicListing[];
+  agents: PublicAgent[];
+  tour3d: PublicTour3D | null;
+}
+
+const { listing, listings, agents, tour3d } = Astro.props;
+const image = listing.media[0];
+const primaryFigure = listing.figures[0];
+const propertyCanCover = image.width >= 1280 && image.height >= 800 && image.width / image.height >= 1.25;
+const showTour = listing.demo.tour3d && tour3d;
+const backHref = listing.section === 'commercial' ? '/commercial/' : '/residential/';
+const backLabel = listing.section === 'commercial' ? 'commercial' : 'residential';
+const provenanceLabel = listing.source
+  ? 'Real listing snapshot · published property details'
+  : 'Synthetic fallback · fictional property details';
+---
+
+<SiteLayout title={listing.title} description={`${listing.title} - ${listingLabel(listing)}.`} contactHref="#booking">
+  <div class="wrap"><a class="back-link" href={backHref}>← Back to {backLabel}</a></div>
+
+  <section class="property-heading wrap">
+    <div>
+      <p class="eyebrow">{listing.status_literal}</p>
+      <h1>{listing.title}</h1>
+      <p class="intro-copy">{listing.locality ?? 'Location not published'}</p>
+      <p class="demo-label">{listingLabel(listing)}</p>
+    </div>
+    {listing.section === 'residential' && primaryFigure && (
+      <div class="heading-price">
+        <span class="eyebrow">{primaryFigure.label_en}</span>
+        <p>{primaryFigure.display_text}</p>
+      </div>
+    )}
+  </section>
+
+  <figure
+    class:list={['property-art', 'wrap', propertyCanCover ? 'property-art--cover' : 'property-art--intrinsic']}
+    style={`--property-media-width:${image.width}px`}
+  >
+    <div class="property-photo-frame">
+      <img
+        class:list={[propertyCanCover ? 'media--cover' : 'media--intrinsic']}
+        style={`--image-width:${image.width}px`}
+        src={image.public_path}
+        alt={image.alt}
+        width={image.width}
+        height={image.height}
+        fetchpriority="high"
+      />
+    </div>
+    <figcaption>{photographLabel(listing)}</figcaption>
+  </figure>
+
+  <div class="property-body wrap">
+    <section class="about-home" aria-labelledby="about-title">
+      <p class="eyebrow">{provenanceLabel}</p>
+      <h2 id="about-title">A closer look.</h2>
+      <p>{listing.description_public ?? 'Description not published.'}</p>
+      {listing.section === 'commercial' && listing.figures.length > 0 && (
+        <dl class="key-facts commercial-figures" aria-label="Published commercial figures">
+          {listing.figures.map(figure => (
+            <div>
+              <dt>{figure.label_en}</dt>
+              <dd>
+                {figure.display_text}
+                {figurePeriodLabel(figure) && <span> {figurePeriodLabel(figure)}</span>}
+                {figure.under_review && <small> Under review</small>}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      )}
+      <dl class="key-facts">
+        <div><dt>Bedrooms</dt><dd>{listing.bedrooms ?? 'Not published'}</dd></div>
+        <div><dt>Bathrooms</dt><dd>{listing.bathrooms ?? 'Not published'}</dd></div>
+        <div><dt>Floor area</dt><dd>Not published</dd></div>
+      </dl>
+      {listing.source && (
+        <p class="small">
+          <a class="source-link" href={listing.source.url} rel="external">Official listing source</a>
+          {' '}· checked 4 October 2026. This snapshot does not guarantee current availability.
+        </p>
+      )}
+    </section>
+
+    <aside class="ledger enquiry-ledger" aria-label="Demo property journey">
+      <p class="eyebrow">One guided demo</p>
+      <h2>Look closer,<br />then try the journey.</h2>
+      <p>Examples below are separated from the published property snapshot.</p>
+      <nav class="property-jump" aria-label="Property demo sections">
+        <a href="#illustrative-tools">Illustrative tools</a>
+        {showTour && <a href="#external-example">3D example</a>}
+        <a href="#booking">Booking demo</a>
+      </nav>
+      <a class="button" href="#booking">Request a viewing (demo)</a>
+      <p class="small">Nothing is sent or saved. No viewing is booked.</p>
+    </aside>
+  </div>
+
+  <div class="property-experience wrap">
+    <section id="illustrative-tools" class="experience-section" aria-labelledby="illustrative-tools-title">
+      <header class="experience-heading">
+        <p class="eyebrow">Illustrative property tools</p>
+        <h2 id="illustrative-tools-title">Examples, not listing evidence.</h2>
+        <p>
+          The schematic boundary and invented areas below are not measurements of this property.
+          The repayment calculator appears only for an open sale with a published, reviewed GBP price.
+        </p>
+      </header>
+      <div class="experience-stack">
+        <AerialDemo />
+        <MortgageCalculator calculator={listing.calculator} />
+      </div>
+    </section>
+
+    {listing.similar_ids.length > 0 && (
+      <section class="experience-section" aria-label="Related listing snapshots">
+        <p class="experience-boundary">{provenanceLabel}</p>
+        <SimilarProperties listing={listing} listings={listings} />
+      </section>
+    )}
+
+    {showTour && (
+      <section id="external-example" class="experience-section" aria-labelledby="external-example-title">
+        <header class="experience-heading">
+          <p class="eyebrow">External example</p>
+          <h2 id="external-example-title">A clearly separate 3D demonstration.</h2>
+          <p>The third-party model is credited in the viewer and does not depict this listing.</p>
+        </header>
+        <Tour3D tour={tour3d} />
+      </section>
+    )}
+
+    <section id="booking" class="experience-section" aria-label="Simulated viewing booking">
+      <BookingFlow agents={agents} />
+    </section>
+
+    <section class="experience-section experience-section--team" aria-label="Published Hampton team snapshot">
+      <TeamSection agents={agents} />
+    </section>
+
+    {listing.legal_notice && (
+      <aside class="legal-note" aria-labelledby="legal-note-title">
+        <p class="eyebrow">Published legal notice</p>
+        <h2 id="legal-note-title">Important information.</h2>
+        <p>{listing.legal_notice.disclaimer}</p>
+        <p>{listing.legal_notice.aml}</p>
+      </aside>
+    )}
+  </div>
+</SiteLayout>

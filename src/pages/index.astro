@@ -1,0 +1,115 @@
+---
+import TeamSection from '../components/TeamSection.astro';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { loadPreviewData, listingLabel, photographLabel } from '../data/preview.ts';
+import { featuredResidential } from '../domain/catalogue.ts';
+
+const data = await loadPreviewData();
+const listing = featuredResidential(data.listings) ?? data.listings[0];
+if (!listing) throw new Error('The public snapshot has no listing to feature.');
+const image = listing.media[0];
+const primaryFigure = listing.figures[0];
+const tourListing = data.tour3d ? data.listings.find(listing => listing.demo.tour3d) : undefined;
+const heroCanCover = image.width >= 960 && image.height >= 640;
+---
+
+<SiteLayout
+  title="A home, a place, a new chapter"
+  description="Explore clearly labelled Jersey residential and commercial listing snapshots in the Hampton Estates local demo."
+  current="home"
+  contactHref={`/property/${listing.public_id}/#booking`}
+>
+  <section class="home-intro wrap">
+    <p class="eyebrow">Jersey living · a first look</p>
+    <div class="intro-grid">
+      <h1>A home. A place.<br /><em>A new chapter.</em></h1>
+      <div>
+        <p class="intro-copy">
+          An editorial route through verified public snapshots, with fictional tools kept visibly
+          separate from published property details.
+        </p>
+        <a class="button" href="/residential/">Explore residential <span aria-hidden="true">↗</span></a>
+        <p class="small muted">Local demo preview. Snapshots do not guarantee current availability.</p>
+      </div>
+    </div>
+  </section>
+
+  <section
+    class:list={['feature', 'wrap', heroCanCover ? 'feature--cover' : 'feature--intrinsic']}
+    style={`--feature-media-width:${image.width}px`}
+    aria-labelledby="featured-title"
+  >
+    <div class="feature-art">
+      <div class="feature-photo-frame">
+        <img
+          class:list={[heroCanCover ? 'media--cover' : 'media--intrinsic']}
+          style={`--image-width:${image.width}px`}
+          src={image.public_path}
+          alt={image.alt}
+          width={image.width}
+          height={image.height}
+          fetchpriority="high"
+        />
+      </div>
+      <span class="image-caption">{photographLabel(listing)}</span>
+    </div>
+    <aside class="ledger">
+      <p class="eyebrow">Residential edit / 01</p>
+      <h2 id="featured-title">{listing.title}</h2>
+      <p class="muted">{listing.locality}</p>
+      <dl>
+        <div><dt>{primaryFigure?.label_en ?? 'Price'}</dt><dd>{primaryFigure?.display_text ?? 'Price not published'}</dd></div>
+        <div><dt>Bedrooms / bathrooms</dt><dd>{listing.bedrooms} / {listing.bathrooms}</dd></div>
+        <div><dt>Published status</dt><dd>{listing.status_literal}</dd></div>
+      </dl>
+      <a class="text-link" href={`/property/${listing.public_id}/`}>
+        Discover this home <span aria-hidden="true">↗</span>
+      </a>
+      <p class="demo-label">{listingLabel(listing)}</p>
+    </aside>
+  </section>
+
+  <section class="home-paths wrap" aria-labelledby="home-paths-title">
+    <header>
+      <p class="eyebrow">Two collections</p>
+      <h2 id="home-paths-title">Choose the next page.</h2>
+    </header>
+    <div class="path-grid">
+      <a class="path-card" href="/residential/">
+        <span class="path-number" aria-hidden="true">01</span>
+        <strong>Residential</strong>
+        <span>Published listing snapshots, their original prices and status.</span>
+      </a>
+      <a class="path-card" href="/commercial/">
+        <span class="path-number" aria-hidden="true">02</span>
+        <strong>Commercial</strong>
+        <span>Verified examples with confidential details withheld.</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="editorial-note wrap">
+    <p class="eyebrow">Clear boundaries</p>
+    <h2>Published details.<br />Illustrative journeys.</h2>
+    <p>
+      {listing.source
+        ? 'The featured details and photograph belong to a listing snapshot checked 4 October 2026. Calculators, boundaries, tours and bookings are labelled examples and do not assert current availability.'
+        : 'The featured home is a synthetic fallback. Its illustration and details are fictional, and every interactive journey remains a labelled demo.'}
+    </p>
+  </section>
+
+  {tourListing && (
+    <section class="editorial-note wrap" aria-labelledby="tour-discovery-title" data-tour-discovery>
+      <p class="eyebrow">Interactive demo</p>
+      <h2 id="tour-discovery-title">Walk through the 3D example.</h2>
+      <div>
+        <p class="muted">
+          3D example - not this property. The credited external model is available from the{' '}{tourListing.title} demo page and does not depict that listing.
+        </p>
+        <p><a class="button" href={`/property/${tourListing.public_id}/#external-example`}>Open the 3D example</a></p>
+      </div>
+    </section>
+  )}
+
+  <div class="home-team wrap"><TeamSection agents={data.agents} /></div>
+</SiteLayout>

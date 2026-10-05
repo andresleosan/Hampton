@@ -1,0 +1,57 @@
+---
+import '../styles/global.css';
+interface Props {
+  title: string;
+  description: string;
+  current?: 'home' | 'residential' | 'commercial';
+  contactHref?: string;
+}
+const { title, description, current, contactHref = '/#contact' } = Astro.props;
+---
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>{title} | Hampton Estates demo</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <aside class="demo-banner" aria-label="Demo status">Local demo preview · no live enquiries</aside>
+    <header class="site-header wrap">
+      <a class="wordmark" href="/" aria-label="Hampton Estates demo home" aria-current={current === 'home' ? 'page' : undefined}><span>Hampton</span><small>ESTATES · JERSEY DEMO</small></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" hidden>Menu <span aria-hidden="true">+</span></button>
+      <nav id="site-nav" aria-label="Main navigation">
+        <a href="/residential/" aria-current={current === 'residential' ? 'page' : undefined}>Residential</a>
+        <a href="/commercial/" aria-current={current === 'commercial' ? 'page' : undefined}>Commercial</a>
+        <a href="/#team">Team</a>
+        <a class="nav-contact" href={contactHref}>Contact <span aria-hidden="true">↗</span></a>
+      </nav>
+    </header>
+    <main id="main" tabindex="-1"><slot /></main>
+    <footer class="site-footer wrap">
+      <div><span class="footer-brand">Hampton Estates</span><p>A first look at a Jersey property experience.</p></div>
+      <p>This is a local demo, not the official Hampton website. Listing snapshots do not guarantee current availability. Enquiries are simulated: nothing is sent or saved.</p>
+      <div class="footer-links"><a href="/residential/">Residential</a><a href="/commercial/">Commercial</a><a href="/#team">Team</a></div>
+    </footer>
+    <script>
+      const button = document.querySelector<HTMLButtonElement>('.menu-toggle');
+      const nav = document.querySelector<HTMLElement>('#site-nav');
+      if (button && nav) {
+        button.hidden = false;
+        document.documentElement.classList.add('has-menu');
+        const close = (returnFocus = false) => {
+          button.setAttribute('aria-expanded', 'false');
+          if (returnFocus) button.focus();
+        };
+        button.addEventListener('click', () => button.setAttribute('aria-expanded', String(button.getAttribute('aria-expanded') !== 'true')));
+        document.addEventListener('keydown', event => {
+          if (event.key === 'Escape' && button.getAttribute('aria-expanded') === 'true') close(true);
+        });
+        nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => close()));
+      }
+    </script>
+  </body>
+</html>

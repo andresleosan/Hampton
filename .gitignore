@@ -1,0 +1,80 @@
+# Operaciones locales (estado de permisos, notas privadas)
+.ops/
+
+# Configuración local heredada de Claude Code: no forma parte del paquete publicable
+.claude/
+
+# Evidencias internas con capturas de terceros: uso interno, no publicar
+docs/evidence/
+
+# Credenciales y secretos
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+id_rsa*
+id_ed25519*
+.netrc
+.git-credentials
+credentials*.json
+secrets/
+*.secret
+
+# Entornos privados (las plantillas sin secretos sí se versionan)
+.env
+.env.*
+!.env.example
+!.env.template
+.dev.vars
+.dev.vars.*
+!.dev.vars.example
+.wrangler/
+.vercel/
+
+# Configuración local de Claude Code
+.claude/settings.local.json
+CLAUDE.local.md
+
+# Bases de datos generadas, copias de seguridad y zona provisional
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+*.sqlite-wal
+*.sqlite-shm
+/data/
+backups/
+*.bak
+*.backup
+
+# Salida de construcción, dependencias y temporales
+node_modules/
+dist/
+# build/ es código del pipeline (specs/plan.md §4.1); la salida de Astro es dist/
+.astro/
+.generated/
+releases/
+.cache/
+coverage/
+playwright-report/
+test-results/
+tmp/
+*.tmp
+*.log
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Paquetes de revisión
+*.zip
+
+# Pruebas con casos reales (D-063): solo en local, nunca en git
+tests/integration/private/
+tests/e2e/private/
+# Maquetas con datos reales importados (D-078): solo en local, nunca en git
+docs/mockups/private/
+
+# Fotografias publicas autorizadas para la preview local: no versionar ni publicar
+public/preview-private/

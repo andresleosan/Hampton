@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1080" viewBox="0 0 1440 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Fictional coastal home — demo illustration</title>
+  <desc id="desc">A geometric illustration of a cream house with blue windows, a garden wall and distant water. It is not a photograph or a real property.</desc>
+  <path fill="#dce7ed" d="M0 0h1440v1080H0z"/>
+  <circle cx="1180" cy="165" r="72" fill="#f6f4ef"/>
+  <path fill="#769ccd" d="M0 435h1440v340H0z"/>
+  <path fill="#507f99" d="M0 500q350-40 720 15t720-5v40H0z"/>
+  <path fill="#b4bdac" d="M0 740q350-150 720-40t720-20v400H0z"/>
+  <path fill="#777f69" d="M0 850q280-180 550-30t890-100v360H0z"/>
+  <path fill="#ece7dc" d="M315 355h690v405H315z"/>
+  <path fill="#555f68" d="m250 365 390-230 430 230z"/>
+  <path fill="#343d49" d="m640 135 430 230H705z"/>
+  <path fill="#d5cec0" d="M705 365h300v395H705z"/>
+  <path fill="#ece7dc" d="M830 186h65v131h-65z"/>
+  <g fill="#1f4e78" stroke="#f6f4ef" stroke-width="14"><path d="M390 415h100v130H390zM555 415h100v130H555zM790 415h100v130H790zM390 605h100v130H390zM790 605h100v130H790z"/></g>
+  <path fill="#1f4e78" d="M550 605h110v155H550z"/>
+  <path fill="#d6d0c4" d="m535 760 160 0 135 320H330z"/>
+  <path fill="#b4aa99" d="M0 860h415v110H0zM835 860h605v110H835z"/>
+  <path fill="#6c7960" d="M105 860V545h65v315zm1100 0V575h70v285z"/>
+  <g fill="#6c7960"><circle cx="130" cy="530" r="140"/><circle cx="1238" cy="575" r="130"/></g>
+  <path fill="#f6f4ef" d="M32 996h650v60H32z"/>
+  <text x="55" y="1036" fill="#323644" font-family="Arial,sans-serif" font-size="25">DEMO ILLUSTRATION · FICTIONAL PROPERTY</text>
+</svg>

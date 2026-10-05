@@ -1,0 +1,529 @@
+---
+import type { PublicTour3D } from '../domain/public-contract.ts';
+
+interface Props { tour: PublicTour3D }
+const { tour } = Astro.props;
+const guidedStops = tour.guided_stops ?? [];
+const transitWaypoints = tour.transit_waypoints ?? [];
+---
+
+<section
+  class="tour"
+  data-tour3d
+  data-embed-url={tour.embed_url}
+  data-tour-config={JSON.stringify({ guidedStops, transitWaypoints })}
+  data-frame-title={`3D ${tour.model_title} tour example by ${tour.author}`}
+  aria-labelledby="tour3d-title"
+>
+  <div class="tour-copy">
+    <p class="example-label">{tour.label_en}</p>
+    <h2 id="tour3d-title">Explore a 3D {tour.model_title.toLowerCase()} example</h2>
+    <p class="tour-description">
+      This third-party model demonstrates the tour controls. It does not depict a Hampton listing.
+    </p>
+    <p class="credit">
+      “{tour.model_title}” by <a href={tour.author_url} rel="external"><strong>{tour.author}</strong></a>, licensed under{' '}
+      <a href={tour.licence_url} rel="license external">{tour.licence}</a>.
+    </p>
+  </div>
+
+  <div class="tour-stage">
+    <div class="frame-mount" data-tour3d-frame>
+      <button class="load-button" type="button" data-tour3d-load>
+        Load 3D tour (example)
+      </button>
+    </div>
+    <div class="tour-controls" data-tour3d-controls hidden>
+      <button class="tour-toggle" type="button" data-tour3d-toggle disabled>Pause guided tour</button>
+      <div class="room-controls" role="group" aria-label="Choose a room">
+        {guidedStops.map((stop, index) => (
+          <button class="room-button" type="button" data-tour3d-room data-stop-index={index} aria-pressed="false" disabled>
+            {stop.label_en}
+          </button>
+        ))}
+      </div>
+    </div>
+    <p class="load-status" role="status" aria-live="polite" data-tour3d-status>
+      The 3D tour has not been loaded.
+    </p>
+    <p class="fallback">
+      If the viewer does not load,
+      <a href={tour.author_url} rel="external">Open the credited example on Sketchfab</a>.
+    </p>
+  </div>
+</section>
+
+<script>
+  type Vector = [number, number, number];
+  interface GuidedStop { id: string; label_en: string; eye: Vector; target: Vector }
+  interface TransitWaypoint { after_stop: string; eye: Vector; target: Vector }
+  interface TourConfig { guidedStops: GuidedStop[]; transitWaypoints: TransitWaypoint[] }
+  interface CameraLookAt { position: Vector; target: Vector }
+  interface ViewerApi {
+    addEventListener(event: 'viewerready' | 'camerastop', callback: () => void): void;
+    getCameraLookAt(callback: (error: unknown, camera?: CameraLookAt) => void): void;
+    setCameraLookAt(eye: Vector, target: Vector, duration?: number): void;
+    setUserInteraction(enabled: boolean): void;
+  }
+  interface SketchfabClient {
+    init(uid: string, options: {
+      success(api: ViewerApi): void;
+      error(): void;
+      autostart: 1;
+      preload: 1;
+      dnt: 1;
+      sound_enable: 0;
+    }): void;
+  }
+
+  declare global {
+    interface Window {
+      Sketchfab?: new (version: string, iframe: HTMLIFrameElement) => SketchfabClient;
+      hamptonSketchfabApiPromise?: Promise<void>;
+    }
+  }
+
+  const VIEWER_API_SRC = 'https://static.sketchfab.com/api/sketchfab-viewer-1.12.1.js';
+  const SEGMENT_MS = 100;
+  const SEGMENTS_PER_MOVE = 12;
+  const ROOM_DWELL_MS = 1_600;
+
+  function loadViewerApi(): Promise<void> {
+    if (window.Sketchfab) return Promise.resolve();
+    if (window.hamptonSketchfabApiPromise) return window.hamptonSketchfabApiPromise;
+    window.hamptonSketchfabApiPromise = new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = VIEWER_API_SRC;
+      script.async = true;
+      script.addEventListener('load', () => resolve(), { once: true });
+      script.addEventListener('error', () => reject(new Error('Sketchfab Viewer API failed to load.')), { once: true });
+      document.head.append(script);
+    });
+    return window.hamptonSketchfabApiPromise;
+  }
+
+  function interpolate(from: Vector, to: Vector, progress: number): Vector {
+    return [
+      from[0] + (to[0] - from[0]) * progress,
+      from[1] + (to[1] - from[1]) * progress,
+      from[2] + (to[2] - from[2]) * progress,
+    ];
+  }
+
+  document.querySelectorAll<HTMLElement>('[data-tour3d]').forEach((root) => {
+    if (root.dataset.initialised === 'true') return;
+    root.dataset.initialised = 'true';
+
+    const button = root.querySelector<HTMLButtonElement>('[data-tour3d-load]');
+    const frameMount = root.querySelector<HTMLElement>('[data-tour3d-frame]');
+    const status = root.querySelector<HTMLElement>('[data-tour3d-status]');
+    const controls = root.querySelector<HTMLElement>('[data-tour3d-controls]');
+    const toggle = root.querySelector<HTMLButtonElement>('[data-tour3d-toggle]');
+    const roomButtons = [...root.querySelectorAll<HTMLButtonElement>('[data-tour3d-room]')];
+    const embedUrl = root.dataset.embedUrl;
+    const configJson = root.dataset.tourConfig;
+    const frameTitle = root.dataset.frameTitle;
+    if (!button || !frameMount || !status || !controls || !toggle || !embedUrl || !configJson || !frameTitle) return;
+
+    let modelUid: string;
+    try {
+      const embed = new URL(embedUrl);
+      const uidMatch = embed.pathname.match(/^\/models\/([a-f0-9]{32})\/embed$/);
+      if (!uidMatch?.[1]) throw new Error('Invalid model URL.');
+      modelUid = uidMatch[1];
+    } catch {
+      status.textContent = 'The 3D tour configuration could not be read. Use the Sketchfab link instead.';
+      return;
+    }
+
+    let config: TourConfig;
+    try {
+      config = JSON.parse(configJson) as TourConfig;
+    } catch {
+      status.textContent = 'The 3D tour configuration could not be read. Use the Sketchfab link instead.';
+      return;
+    }
+
+    button.addEventListener('click', async () => {
+      button.disabled = true;
+      button.setAttribute('aria-busy', 'true');
+      status.textContent = 'Loading 3D tour…';
+
+      const iframe = document.createElement('iframe');
+      iframe.className = 'tour-frame';
+      iframe.title = frameTitle;
+      iframe.tabIndex = 0;
+      iframe.loading = 'eager';
+      iframe.referrerPolicy = 'no-referrer';
+      iframe.setAttribute(
+        'sandbox',
+        'allow-forms allow-pointer-lock allow-popups allow-presentation allow-same-origin allow-scripts',
+      );
+
+      const slowLoadTimer = window.setTimeout(() => {
+        status.textContent =
+          'The 3D tour is taking longer than expected. Use the Sketchfab link if it does not appear.';
+      }, 12_000);
+
+      frameMount.replaceChildren(iframe);
+      iframe.focus();
+
+      try {
+        await loadViewerApi();
+      } catch {
+        window.clearTimeout(slowLoadTimer);
+        status.textContent = 'The 3D tour could not be loaded here. Use the Sketchfab link instead.';
+        return;
+      }
+      if (!window.Sketchfab) {
+        window.clearTimeout(slowLoadTimer);
+        status.textContent = 'The 3D tour could not be loaded here. Use the Sketchfab link instead.';
+        return;
+      }
+
+      const client = new window.Sketchfab('1.12.1', iframe);
+      client.init(modelUid, {
+        autostart: 1,
+        preload: 1,
+        dnt: 1,
+        sound_enable: 0,
+        success(api) {
+          api.addEventListener('viewerready', () => {
+            window.clearTimeout(slowLoadTimer);
+            button.removeAttribute('aria-busy');
+            controls.hidden = false;
+            toggle.disabled = false;
+            roomButtons.forEach(roomButton => { roomButton.disabled = false; });
+            iframe.focus();
+
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const route = config.guidedStops.flatMap((stop) => {
+              const transit = config.transitWaypoints
+                .filter(waypoint => waypoint.after_stop === stop.id)
+                .map(waypoint => ({ ...waypoint, kind: 'transit' as const }));
+              return [{ ...stop, kind: 'stop' as const }, ...transit];
+            });
+            let routeIndex = 0;
+            let running = false;
+            let completed = false;
+            let timer: number | undefined;
+            let animationToken = 0;
+
+            const cancelPending = () => {
+              animationToken += 1;
+              if (timer !== undefined) window.clearTimeout(timer);
+              timer = undefined;
+            };
+
+            const animateTo = (
+              point: { eye: Vector; target: Vector },
+              shouldContinue: () => boolean,
+              onComplete: () => void,
+            ) => {
+              const token = ++animationToken;
+              api.getCameraLookAt((error, camera) => {
+                if (token !== animationToken || !shouldContinue()) return;
+                if (error || !camera) {
+                  running = false;
+                  api.setUserInteraction(true);
+                  toggle.textContent = 'Play guided tour';
+                  status.textContent = 'The camera could not be moved. Manual controls remain available.';
+                  return;
+                }
+                const segmentCount = prefersReducedMotion ? 1 : SEGMENTS_PER_MOVE;
+                let segment = 1;
+                const nextSegment = () => {
+                  if (token !== animationToken || !shouldContinue()) return;
+                  const progress = segment / segmentCount;
+                  const durationSeconds = prefersReducedMotion ? 0.001 : SEGMENT_MS / 1_000;
+                  api.setCameraLookAt(
+                    interpolate(camera.position, point.eye, progress),
+                    interpolate(camera.target, point.target, progress),
+                    durationSeconds,
+                  );
+                  if (segment === segmentCount) {
+                    timer = window.setTimeout(onComplete, prefersReducedMotion ? 1 : SEGMENT_MS);
+                    return;
+                  }
+                  segment += 1;
+                  timer = window.setTimeout(nextSegment, prefersReducedMotion ? 1 : SEGMENT_MS);
+                };
+                nextSegment();
+              });
+            };
+
+            const markActiveRoom = (id: string | null) => {
+              roomButtons.forEach((roomButton, index) => {
+                roomButton.setAttribute('aria-pressed', String(config.guidedStops[index]?.id === id));
+              });
+            };
+
+            const pauseGuidedTour = () => {
+              if (!running) return;
+              running = false;
+              cancelPending();
+              api.setUserInteraction(true);
+              toggle.textContent = 'Resume guided tour';
+              status.textContent = 'Guided tour paused. Manual controls enabled.';
+            };
+
+            const advance = () => {
+              if (!running) return;
+              if (routeIndex >= route.length) {
+                running = false;
+                completed = true;
+                api.setUserInteraction(true);
+                toggle.textContent = 'Play guided tour';
+                status.textContent = 'Guided tour complete. Manual controls enabled.';
+                return;
+              }
+              const point = route[routeIndex]!;
+              animateTo(point, () => running, () => {
+                if (!running) return;
+                routeIndex += 1;
+                if (point.kind === 'stop') {
+                  markActiveRoom(point.id);
+                  status.textContent = `Viewing ${point.label_en}.`;
+                  timer = window.setTimeout(advance, ROOM_DWELL_MS);
+                } else {
+                  advance();
+                }
+              });
+            };
+
+            const playGuidedTour = () => {
+              cancelPending();
+              if (completed || routeIndex >= route.length) {
+                routeIndex = 0;
+                completed = false;
+              }
+              running = true;
+              api.setUserInteraction(false);
+              toggle.textContent = 'Pause guided tour';
+              status.textContent = routeIndex === 0 ? '3D tour loaded. Starting guided tour.' : 'Guided tour resumed.';
+              advance();
+            };
+
+            toggle.addEventListener('click', () => {
+              if (running) pauseGuidedTour();
+              else playGuidedTour();
+            });
+
+            roomButtons.forEach((roomButton, index) => {
+              roomButton.addEventListener('click', () => {
+                if (running) pauseGuidedTour();
+                else cancelPending();
+                const stop = config.guidedStops[index];
+                if (!stop) return;
+                api.setUserInteraction(false);
+                toggle.textContent = 'Resume guided tour';
+                completed = false;
+                const stopRouteIndex = route.findIndex(point => point.kind === 'stop' && point.id === stop.id);
+                routeIndex = stopRouteIndex < 0 ? routeIndex : stopRouteIndex + 1;
+                status.textContent = `Moving to ${stop.label_en}.`;
+                animateTo(stop, () => true, () => {
+                  api.setUserInteraction(true);
+                  markActiveRoom(stop.id);
+                  status.textContent = `Viewing ${stop.label_en}. Manual controls enabled.`;
+                });
+              });
+            });
+
+            if (prefersReducedMotion) {
+              api.setUserInteraction(true);
+              toggle.textContent = 'Play guided tour';
+              status.textContent = '3D tour loaded. Guided motion is off because reduced motion is preferred.';
+            } else {
+              let initialCameraSettled = false;
+              const startWhenInitialCameraSettles = () => {
+                if (initialCameraSettled) return;
+                initialCameraSettled = true;
+                playGuidedTour();
+              };
+              api.addEventListener('camerastop', startWhenInitialCameraSettles);
+              timer = window.setTimeout(startWhenInitialCameraSettles, 1_500);
+            }
+          });
+        },
+        error() {
+          window.clearTimeout(slowLoadTimer);
+          status.textContent = 'The 3D tour could not be loaded here. Use the Sketchfab link instead.';
+        },
+      });
+    }, { once: true });
+  });
+</script>
+
+<style>
+  .tour {
+    display: grid;
+    gap: clamp(1.25rem, 4vw, 2.5rem);
+    padding: clamp(1.25rem, 4vw, 2.5rem);
+    border: 1px solid var(--line, #c8c9c5);
+    background: var(--white, #fff);
+  }
+
+  .tour-copy,
+  .tour-stage {
+    min-width: 0;
+  }
+
+  .example-label {
+    width: fit-content;
+    margin: 0;
+    padding: 0.4rem 0.65rem;
+    border: 1px solid var(--brand-deep, #1f4e78);
+    color: var(--brand-deep, #1f4e78);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    margin: 0.9rem 0 0;
+    color: var(--ink, #323644);
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: clamp(1.7rem, 4vw, 2.4rem);
+    font-weight: 400;
+    line-height: 1.08;
+    text-wrap: balance;
+  }
+
+  .tour-description,
+  .credit,
+  .load-status,
+  .fallback {
+    color: var(--ink-2, #5b6170);
+  }
+
+  .tour-description {
+    max-width: 58ch;
+    margin: 1rem 0 0;
+  }
+
+  .credit {
+    margin: 1rem 0 0;
+    font-size: 0.82rem;
+  }
+
+  a {
+    color: var(--brand, #2b6ca3);
+    text-underline-offset: 0.2em;
+    transition: color 180ms ease;
+  }
+
+  a:hover {
+    color: var(--brand-deep, #1f4e78);
+  }
+
+  a:focus-visible,
+  .load-button:focus-visible,
+  .tour-toggle:focus-visible,
+  .room-button:focus-visible {
+    outline: 2px solid var(--brand-deep, #1f4e78);
+    outline-offset: 2px;
+  }
+
+  .frame-mount {
+    display: grid;
+    width: 100%;
+    min-width: 0;
+    place-items: center;
+    overflow: hidden;
+    border: 1px solid var(--line, #c8c9c5);
+    background: var(--paper, #f6f4ef);
+    aspect-ratio: 16 / 9;
+  }
+
+  .load-button {
+    min-height: 44px;
+    margin: 1rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--brand, #2b6ca3);
+    background: var(--brand, #2b6ca3);
+    color: var(--white, #fff);
+    cursor: pointer;
+    font: inherit;
+    font-weight: 700;
+    transition:
+      background-color 180ms ease,
+      border-color 180ms ease;
+  }
+
+  .load-button:hover {
+    border-color: var(--brand-deep, #1f4e78);
+    background: var(--brand-deep, #1f4e78);
+  }
+
+  .load-button:disabled {
+    cursor: wait;
+    opacity: 0.75;
+  }
+
+  .tour-controls {
+    margin-top: 0.75rem;
+  }
+
+  .tour-toggle,
+  .room-button {
+    min-height: 44px;
+    border: 1px solid var(--brand, #2b6ca3);
+    background: var(--white, #fff);
+    color: var(--brand-deep, #1f4e78);
+    cursor: pointer;
+    font: inherit;
+    font-weight: 700;
+  }
+
+  .tour-toggle {
+    width: 100%;
+    padding: 0.65rem 1rem;
+    background: var(--brand, #2b6ca3);
+    color: var(--white, #fff);
+  }
+
+  .room-controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .room-button {
+    padding: 0.55rem 0.7rem;
+  }
+
+  .room-button[aria-pressed='true'] {
+    background: var(--paper, #f6f4ef);
+    box-shadow: inset 0 -3px var(--brand, #2b6ca3);
+  }
+
+  :global(.tour-frame) {
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+
+  .load-status,
+  .fallback {
+    margin: 0.75rem 0 0;
+    font-size: 0.82rem;
+  }
+
+  @media (min-width: 820px) {
+    .tour {
+      grid-template-columns: minmax(15rem, 0.75fr) minmax(0, 1.5fr);
+      align-items: center;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    a,
+    .load-button,
+    .tour-toggle,
+    .room-button {
+      transition: none;
+    }
+  }
+</style>
